@@ -76,5 +76,31 @@ console.log(addup(6));
 
 function addup(n){                      ////how it works     6 * (7) / 2  -----  3.5 * 6  ----- 21  ////is it better code than previous one????? ///doesnt depend on code length 
 return n * (n+1) / 2;                  ////depends on code performance.  //// or less-memoery used /// more readable  //// ?????
-}
+}                                      ///performance of this code better compared above code.!!!
 console.log(addup(6));
+
+to check ceck performance for each code use performance.now();  ////crazy right......its in code snippet
+
+Problem with time
+1.different machines will record different times.
+2.same machines will record different times
+3.for fast algorithms,,speed measurements may not be precise enough.
+
+rather than counting seconds lets count number of simple operations computer has to perform.         //////  Great right!!!!!!!
+
+counting operations
+
+function addup(n){                       
+return n * (n+1) / 2;                  //// 1.multiplication 2.addition 3. division    ///no. of opeartions 3
+}        
+
+
+function addup(n){
+	let total = 0;
+	for(i=1;i<=n;i++){
+	total+= i;
+	}                              //////  1.for loop with + opeator   ////its huge if u give 5 ,,, 5 number of operations ,,,, if 10000000 ---- 1000000 no. of 
+	return total;                                opearions,,,coollll!!!!!!!    counting is hard here /// grows proportinaolyy with n.
+}
+
+
