@@ -41,7 +41,7 @@ console.log("hello from snippet"); //for output go down and hit play
     objectives:
     motivate need for something like big o notation
     describe,simplify,define and evaluate time-complexity, space-complexity
-    describe ehat logarithm is.
+    describe what logarithm is.
     
     
     IDEA: We can have multiple implementations of same function.
@@ -60,3 +60,21 @@ console.log("hello from snippet"); //for output go down and hit play
     
 
   Day -2 
+
+//one approach for above problem   //all code are in chrome console //created as snippet.
+function addup(n){
+	let total = 0;
+	for(i=1;i<=n;i++){
+	total+= i;
+	}
+	return total;
+}
+
+console.log(addup(6));
+
+//One more approach for this problem
+
+function addup(n){                      ////how it works     6 * (7) / 2  -----  3.5 * 6  ----- 21  ////is it better code than previous one????? ///doesnt depend on code length 
+return n * (n+1) / 2;                  ////depends on code performance.  //// or less-memoery used /// more readable  //// ?????
+}
+console.log(addup(6));
