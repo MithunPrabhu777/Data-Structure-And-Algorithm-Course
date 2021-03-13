@@ -95,6 +95,7 @@ return n * (n+1) / 2;                  //// 1.multiplication 2.addition 3. divis
 }        
 
 
+
 function addup(n){
 	let total = 0;
 	for(i=1;i<=n;i++){
@@ -102,5 +103,84 @@ function addup(n){
 	}                              //////  1.for loop with + opeator   ////its huge if u give 5 ,,, 5 number of operations ,,,, if 10000000 ---- 1000000 no. of 
 	return total;                                opearions,,,coollll!!!!!!!    counting is hard here /// grows proportinaolyy with n.
 }
+
+
+Day - 3
+
+Introducing....Big O
+
+It allows us to talk formally about how the runtime of an algorithm grows as the input grow.
+
+Definition: O(f(n)) if number of simple operations computer has to do is eventually less than a constant times f(n),as n increases
+
+f(n) could be linear = n
+f(n) could be quadratic = n^2
+f(n) could be constant = 1
+f(n) could be something different.
+
+Above example second code having 3 operations which won't change if value of n increases so u can consider this as O(1) ---- constant
+First code number of operations will increase as n increases in linear format so u can consider this as O(n)  ----- Linear
+
+Another Example
+
+function countUpAndDown(n){
+    console.log("Going Up!!!");
+    for(let i=0;i<n;i++){                              //////   O(n)
+        console.log(i);
+    }                                                                                     O(2n)  eventually  2 doesn't matter so will take it as O(n)
+    console.log("At the top!\n Going down...");
+    for(let j= n-1; j>=0;j--){                       ///////   O(n)   
+        console.log(j);
+    }
+    console.log("Back down.Bye!");
+}
+
+countUpAndDown(10);
+
+OMG MOAR EXAMPLEZ
+
+function printAllPairs(n){
+for(var i=0;i<n;i++){                 //// O(n)    nested inside for loop so O(n^2)  
+    for(var j=0;j<n;j++){             //// O(n)            
+        console.log(i,j);
+    }
+}
+}
+
+printAllPairs(10);
+
+Simplifying Big O Expressions
+
+when determining time complexity of algorithm, there are some helpful rule of thumbs for big O expressions
+
+These rules of thumb are consequences of definition of big O notation.
+1.Constants don't matter  ----  O(2n) = O(n)  ---- O(500) = O(1)
+2.Smaller Terms don't matter ----- O(n+10) = O(n)  ,  O(1000n + 50 ) = O(n) ,,,,,,     O(n^2 + 5n + 8) = O(n^2)
+
+Big O shorthands
+1.Arithematic operations are constant
+2.variable assignment is constant
+3.accessing elements in array(by index) or object (by key) is constant.
+4.In a loop, complexity is length of loop times complexity of whatever happens inside loop.
+
+One more example
+
+function logAtLeast5(n){
+ for(var i=1;i<=Math.max(5,n); i++){        /////  O(n) time complexity
+     console.log(i); 
+ }
+}
+
+logAtLeast5(10);
+
+
+function logAtMost5(n){
+ for(var i=1;i<=Math.min(5,n); i++){        /////  O(5) === O(1)-- constant time complexity
+     console.log(i); 
+ }
+}
+
+logAtMost5(10);
+
 
 
