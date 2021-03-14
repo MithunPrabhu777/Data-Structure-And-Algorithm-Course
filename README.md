@@ -332,9 +332,49 @@ What is an algorithm??  -----  A process or set of steps to accomplish a certain
 
 Why do I need to know this???
 Almost everything that you do in programming involves some kind of algorithm!!
-It is foundation for beng a successful problem solving developer.
+It is foundation for being a successful problem solving developer.
 
 How Do You Improve????????????????????????????
+1.Devise a plan for solving problems.
+2.Master common problem solving patterns.
+
+Problem Solving Strategies:
+1.Understand the problem
+2.Explore Concrete Examples
+3.Break It Down
+4.Solve/Simplify
+5.Look Back and Refactor
+
+	1.Understand the Problem:
+	1.Can I restate the problem in my own words?
+	2.What are the inputs that go into the problem??
+	3.What are the outputs that should come from solution to problem?
+	4.Can the outputs be determined from the inputs?? In other words, do I have enough information to solve problem?
+	5.How should I label important pieces of data that are part of problem??
+
+	Write function which takes two numbers and returns their sum.
+	1.Implementing addition of two numbers
+	2.Inputs may be in Integer,Float,Double,String
+	3.Output may result in Float,Double or iNteger
+	4.Yes 
+	5.Num1 and Num2 as input ,,, function is called as sum ,,, output will be returned.
+
+2.Explore Examples
+	1.Start with simple examples
+	2.Progress to more complex examples
+	3.Explore Examples with empty inputs
+	4.Explore examples with invalid inputs
+
+Write a function which takes in a string and returns counts of each character in string.
+
+function stringLength(str){
+count = 0;
+for(let i=0;i<str.length;i++){
+  count+=1
+}
+return count;
+}
+stringLength("mithun is great");
 
 
 
