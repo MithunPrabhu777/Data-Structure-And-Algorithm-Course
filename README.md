@@ -182,5 +182,104 @@ function logAtMost5(n){
 
 logAtMost5(10);
 
+Day - 4
+
+Space Complexity
+
+so far, we have been focusing on time complexity: how can we analyze runtime of an algorithm as size of the inputs increases?
+we can also use big O notation to analyze space complexity:how much additional memory do we need to allocate in order to run code in our algorithm??
+
+what about inputs???
+
+sometimes we hear term auxillary space complexity to refer to space requried by algorithm, not including space taken up inputs.
+
+Space complexity in JS(Rules of thumb)
+1. Most primitives (booleans,numbers,undefined,null) are constant space.
+2. Strings require O(n) space (n is string length)
+3. Refrence types are generally O(n), where n is length (for arrays) or number of keys(for objects)
+
+An Example
+
+function sum(arr){
+    let total = 0;                             ////Now we are talking about space complexity i.e here we have only 2 numbers total and i  ---- have constant space --
+    for(let i=0;i<arr.length;i++){           ///  even if u give million of elements in array it wont take much space in total.
+        total+=arr[i];
+    }
+return total;
+}
+
+sum([2,4,5,1,3]);
+
+Another Example
+
+function double(arr){                      ///// new Array   its getting longer as number of input increases,,, as array size increases. O(n) space --- n numbers.
+let newArray = [];
+for(let i=0; i< arr.length;i++){
+    newArray.push(2 * arr[i]);
+}
+return newArray;
+}
+
+double([2,3,4,5,6,7,8,9,0]);
+
+LOGARITHMS
+
+common complexities are O(1),O(n),O(n^2).
+some have complex mathematical expressions.
+
+What's a log again???
+
+It's a inverse of exponentiation.   -------  log2(8) = 3  -------   which means that base 2 to the power of 3 is 8.
+
+log2(value) = exponent -------->  2^exponent = value
+
+we'll omit the 2  ----->     log === log2
+
+What??????
+
+This isn't a amth coure,so here's a rule of thumb.
+
+The logarithm of a number roughly measures the number of times you can divide that number by 2 before you get a value that's less than or equal to one.
+
+Logarithm Examples: 8 is the value ----  8/2 - 4,  4/2 - 2 , 2/2 - 1 ,,3 times divided the number 8 so log of 8  is 3.
+
+find the log of 25  ------   25/2=12.5  ---  12.5/2 ---- 6.25/2 --- 3.125/2 --- 1.5625/2 ---- 0.78125  SO log of 25 is inbetween 1.5625 - 0.78125 i.e 4.64.
+
+Logarithmic time complexity is great!!!!!
+
+Who Cares???
+
+Certain searching algorithms have logarithmic time complexity.
+Efficient sorting algorithms involve logarithms.
+Recursion sometimes involves logarithmic space complexity.
+
+BUILT IN DATA STRUCTURES through lens of Big-O
+
+Let's spend a couple of minutes analyzing things we do all time in JS:Working with Arrays,Objects and built-in methods.
+
+Objectives:
+1.Understand how objects and arrays work, through the lens of Big-O
+2.Explain why adding elements to beginning of array is costly.
+3.Compare and Contrast runtime for arrays and objects,as well as built-in methods.
+
+OBJECTS(unordered,key value pairs!!!)
+
+let instructor = {
+firstName:"kelly",
+isInstructor:true,
+favoriteNumbers:[1,2,3,4]
+}
+
+When to use objects:
+1.when you don't need order
+2.when you need fast access/insertion and removal.
+
+Big-O of Objects ---- When you don't need any ordering,objects are an excellent choice!!!
+
+Insertion - O(1)
+Removal - O(1)
+Searching - O(N)
+Access - O(1)
+
 
 
