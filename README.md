@@ -281,5 +281,60 @@ Removal - O(1)
 Searching - O(N)
 Access - O(1)
 
+Big O of Object Methods
+1.Object.keys - O(N)
+2.Object.values - O(N)
+3.Object.entries - O(N)
+4.hasOwnProperty - O(1)
+
+ARRAYS ------ Ordered lists!!!
+
+let names = ["Michael","Melissa","Andrea"];
+
+let values = [true,{},[],2,"awesome"];
+
+when to use arrays 
+1.when you need order
+2.when you need fast access/insertion and removal(sort of.....)
+
+Big O of Arrays
+Insertion - It depends...
+Removal - It depends....
+Searching - O(N)
+Access - O(1)
+
+Accessing elements in arrays is constant task
+Inserting element at the end is not a big issue
+but inserting element at the begining is big task because ,,, u have to again assign index to each and every elements in array.
+Same Deleting also.
+
+Big O Array Operations
+1.push - O(1)
+2.pop - O(1)
+3.shift - O(N)
+4.unshift - O(N)
+5.concat - O(N)
+6.slice - O(N)
+7.splice - O(N)
+8.sort - O(N*log N)
+9.forEach/map/filter/reduce/etc - O(N)
+
+For more details -------    https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat
+
+ALGORITHMS And PROBLEM SOLVING PATTERNS
+
+OBjectives
+1.Define what algorithm is
+2.Devise plan to solve algorithms
+3.Compare and contrast problem solving patterns including frequency counters,two pointer problems and divide and conquer.
+
+What is an algorithm??  -----  A process or set of steps to accomplish a certain task.
+
+Why do I need to know this???
+Almost everything that you do in programming involves some kind of algorithm!!
+It is foundation for beng a successful problem solving developer.
+
+How Do You Improve????????????????????????????
+
 
 
