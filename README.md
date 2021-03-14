@@ -370,11 +370,21 @@ Write a function which takes in a string and returns counts of each character in
 function stringLength(str){
 count = 0;
 for(let i=0;i<str.length;i++){
-  count+=1
+  count+=1                              //// this is solution for length of string and is wrong solution for above question so what is the solution?????
 }
 return count;
 }
 stringLength("mithun is great");
+
+
+////check all these in the snippet section in chrome browser.
+
+3.Break it Down
+
+	1.Explicitly write out the steps you need tot take.
+	2.This forces you to think about code you will write before you write it, and helps you to catch any lingering conceptual issues or misunderstandings before you dive in and have to worry about details.(language syntax as well).
+
+
 
 
 
