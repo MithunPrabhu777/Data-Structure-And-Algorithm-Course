@@ -381,10 +381,31 @@ stringLength("mithun is great");
 
 3.Break it Down
 
-	1.Explicitly write out the steps you need tot take.
+	1.Explicitly write out the steps you need to take.
 	2.This forces you to think about code you will write before you write it, and helps you to catch any lingering conceptual issues or misunderstandings before you dive in and have to worry about details.(language syntax as well).
 
+Day - 5
 
+Write a function which takes in a string and returns counts of each character in string.
+
+Every changes or pseudo code written in browser snippet
+
+4.SOLVE THE PROBLEM ---- if you cannot Solve a simpler problem.
+
+SIMPLIFY
+1.Find core difficulty in what you are trying to do
+2.Temporarily ignore that difficulty
+3.write a simplified solution
+4.then incorporate difficulty back in
+
+Step 5: Look Back and Refactor
+1.Can you check the result?
+2.can you derive result differently??
+3.can u understand it at a glance??
+4.can you use result or method for some other problem?
+5.can you improve performance of your solution??
+6.can you think of other ways to refactor??
+7.How other people solved this problem??
 
 
 
