@@ -407,5 +407,106 @@ Step 5: Look Back and Refactor
 6.can you think of other ways to refactor??
 7.How other people solved this problem??
 
+Day - 6
+
+All the things mentioned in snippet.
+
+/*function charCount(str){
+ let obj = {};
+ for(let i=0;i<str.length;i++){
+     let char = str[i].toLowerCase();
+     if(/[a-z0-9]/.test(char)){
+         if(obj[char] > 0){
+             obj[char]++;
+         }else{
+             obj[char] = 1;
+         }
+     }
+ }
+ return obj;
+}
+
+charCount('Hello 1223jdj');
+*/
+//If you are not a fan of for loop ,,,you can use this....
+
+/*function charCount(str){
+ let obj = {};
+ for(let char of str){
+     char = char.toLowerCase();
+     if(/[a-z0-9]/.test(char)){
+         if(obj[char] > 0){
+             obj[char]++;
+         }else{
+             obj[char] = 1;
+         }
+     }
+ }
+ return obj;
+}
+
+charCount('Hello 1223jdj');
+
+*/
+
+/*
+function charCount(str){
+ let obj = {};
+ for(let char of str){
+     char = char.toLowerCase();
+     if(/[a-z0-9]/.test(char)){
+         obj[char] = ++obj[char]  || 1;
+     }
+ }
+ return obj;
+}
+
+charCount('Hello 1223jdj');
+
+*/
+
+//if u use regular expressions in code then performace will be reduced.so below one is better code for performancebut it is lengthier one.
+function charCount(str){
+ let obj = {};
+ for(let char of str){
+     char = char.toLowerCase();
+     if(isAlphaNumeric(char)){
+         obj[char] = ++obj[char]  || 1;
+     }
+ }
+ return obj;
+}
 
 
+function isAlphaNumeric(char){
+    let code = char.charCodeAt(0);
+    if(!(code > 47 && code < 50) && !(code>64 && code <91) && !(code >96 && code <123)){
+        return false
+    }
+    return true
+}
+
+charCount('Hello 1223jdj');
+
+HOW DO YOU IMPROVE????
+
+1.Devise a plan for solving problems
+2.Master common problem solving patterns
+
+Problem Solving Patterns
+
+some patterns:
+1. frequency counter
+2. multiple pointers
+3. sliding window
+4. divide and conquer
+5. dynamic programming
+6. greedy algorithm
+7. backtracking
+8. many more!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+1.Frequency Counters
+This pattern uses objects or sets to collect values/frequencies of values.
+This can often avoid need for nested loops or O(N^2) operations with arrays/strings
+
+AN Example
