@@ -510,3 +510,77 @@ This pattern uses objects or sets to collect values/frequencies of values.
 This can often avoid need for nested loops or O(N^2) operations with arrays/strings
 
 AN Example
+
+Day -7
+ 
+Write function called same, which accepts two arrays. function should return true if every value in array has it's corresponsing value squared in second array. frequency of values must be same.
+
+same([1,2,3],[4,1,9]) //true
+same([1,2,3],[1,9]) //false
+same([1,2,1],[4,4,1])  // false
+
+function same(arr1,arr2){
+    if(arr1.length !== arr2.length){
+        return false
+    }
+    for(let i=0; i < arr1.length;i++){
+        let correctIndex = arr2.indexOf(arr1[i] ** 2);
+        if(correctIndex === -1){
+            return false;
+        }
+        arr2.splice(correctIndex,1);
+    }
+    return true
+}
+
+
+same([1,2,3,1],[4,9,1,1]);  //Time Complexity - N^2  // indexOf is considered as one more loop. ///It is called Naive approach.
+
+Another approach is refactored(Time Complexity --- O(n))
+
+function same(arr1,arr2){
+    if(arr1.length !== arr2.length){
+        return false;
+    }
+    let frequencycounter1 = {};
+    let frequencycounter2 = {};
+    for (let val of arr1){
+       frequencycounter1[val] = (frequencycounter1[val] || 0) + 1;
+       console.log(frequencycounter1[val]);
+    }
+    for(let val of arr2){
+        frequencycounter2[val] = (frequencycounter2[val] || 0) + 1;
+        console.log(frequencycounter2[val]);
+    }
+    console.log(frequencycounter1);
+    console.log(frequencycounter2);
+    for(let key in frequencycounter1){
+        if (!(key ** 2 in frequencycounter2)){
+            return false;
+        }
+        if(frequencycounter2[key ** 2] !== frequencycounter1[key]){
+            return false;
+        }
+    }
+return true;
+}
+
+
+                                   // It's effienciency very high compared to previous example O(n)
+
+same([1,2,3],[1,4,9]);
+
+----------********************-----------------------
+
+ANAGRAMS
+Given Two stringss, write function to determine if second string is anagram of first. anagram is word,phrase or name formed by rearrangingletters of another such as cinema,formed from iceman.
+
+validAnagram('','') //true
+validAnagram('aaz','zza')  //false
+validAnagram('anagram','nagaram')  //true
+validAnagram('rat','car')   //false
+validAnagram('awesome','awesom') //false
+validAnagram('qwerty','qeywrt') // true
+validAnagram('texttwisttime','timetwisttext') //true
+
+ 
