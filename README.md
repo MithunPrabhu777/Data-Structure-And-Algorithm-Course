@@ -583,4 +583,98 @@ validAnagram('awesome','awesom') //false
 validAnagram('qwerty','qeywrt') // true
 validAnagram('texttwisttime','timetwisttext') //true
 
- 
+
+--------------------************************-------------------------------------------
+
+Day - 8
+
+Every code in code snippet
+
+function validAnagram(str1,str2){
+if(str1.length !== str2.length){
+    return false
+}
+
+let lookup = {};
+
+for (let i=0; i<str1.length;i++){
+     let letter = str1[i];
+     lookup[letter] ? lookup[letter]+=1 : lookup[letter] = 1;
+}
+
+for(let i=0;i<str2.length;i++){
+    let letter = str1[i];
+    if(!lookup[letter]){
+        return false;
+    }
+    else {
+        lookup[letter] -= 1;
+    }
+}
+return true;
+}
+
+validAnagram("anagram","nagaram")
+
+
+--------------*******************--------------
+
+Multiple Pointers
+
+Creating pointers or values that correspond to index or position and move towards beginning,end or middle based on on a certain consition.
+very efficient for solving problems with minimal space complexity as well
+
+An Example:
+
+Write function called sumZero which accepts a sorted array of integers. function should find first pair where sum is 0. return array that includes both values sum to zero or undefined if pair does not exist.
+
+sumZero([-3,-2,-1,0,1,2,3])  //[-3,3]
+sumZero([-2,0,1,3]) //undefined
+
+function sumZero(arr){
+for(let i=0;i<arr.length;i++){
+    for(let j=i+1;j<arr.length;j++){
+        if(arr[i] + arr[j] === 0){
+            return [arr[i],arr[j]];
+        }
+
+    }
+    console.log([arr[i],arr[j]])
+}
+}
+
+sumZero([-2,1,2,3]);
+
+//time complexity O(n^2)
+//space complexity O(1)
+
+REFACTOR----------------
+
+function sumZero(arr){
+    let left = 0;
+    let right = arr.length - 1;
+    while(left < right){
+        let sum = arr[left] + arr[right];
+        if(sum === 0){
+            return [arr[left],arr[right]];
+        }
+        else if(sum > 0 ){
+            right--;
+        }
+        else{
+            left++;
+        }
+    }
+
+}                                         //Refactored
+
+sumZero([-4,-3,-1,1,3,3]);
+
+-----countUniqueValues----
+
+Implement function called countUniqueValues which accepts sorted array, and counts unique values in array. there can be negative numbers in array, but it will alwasys be sorted.
+
+countUniqueValues([1,1,1,1,1,2]);  //2
+countUniqueValues([1,2,3,4,4,7,7,12,12]); //6
+
+
