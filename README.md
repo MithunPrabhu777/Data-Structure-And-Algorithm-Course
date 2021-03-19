@@ -670,11 +670,105 @@ function sumZero(arr){
 
 sumZero([-4,-3,-1,1,3,3]);
 
+
 -----countUniqueValues----
 
 Implement function called countUniqueValues which accepts sorted array, and counts unique values in array. there can be negative numbers in array, but it will alwasys be sorted.
 
 countUniqueValues([1,1,1,1,1,2]);  //2
 countUniqueValues([1,2,3,4,4,7,7,12,12]); //6
+
+Day - 9
+
+function countUniqueValues(arr){
+    let i = 0;
+    for(let j =1;j<arr.length;j++){
+        if(arr[i] !== arr[j]){
+            i+=1;
+            arr[i] = arr[j];
+        }
+        console.log(arr[i],arr[j]);
+    }
+    return i+1;
+}
+
+countUniqueValues([1,1,2,3,3,4,5,6,6,7]);
+
+------------------------------************************--------------------------
+
+SLIDING WINDOW::
+
+This pattern involves creating a window which can either be array or number from one position to another
+
+Depending on certain condition, window either increases or closes
+
+very useful for keeping track of subset of data in array/string etc.
+
+An Example::
+
+Write a function called maxSubarraySum which accepts array of integers and number called n. function should calculate maximum sum of n consecutive elemets in array.
+
+maxSubarraySum([1,2,5,2,8,1,5],2);  // 10
+maxSubarraySum([1,2,5,2,8,1,5],4);  // 10
+maxSubarraySum([],4);  //null
+
+function maxSubarraySum(arr,num){
+if(num > arr.length){
+    return null;
+}
+let max = -Infinity;
+for(i=0;i<arr.length-num+1;i++){
+    let temp = 0;
+    for(let j=0;j<num;j++){
+        temp+=arr[i + j];
+    }
+    console.log(temp,max);
+    if(temp > max){
+         max = temp
+    }
+}                                         // Very bad approach of solving problem O(n^2)
+return max;
+}
+
+maxSubarraySum([2,6,9,2,1,8,5,6,3],3);
+
+
+------------------Refactor::::::::::::::::
+
+Same question with better solution -----------  O(n)
+
+function maxSubArraySum(arr,num){
+let maxSum = 0;
+let tempSum = 0;
+if(arr.length < num){
+    return null
+}
+for(let i=0;i<num;i++){
+    maxSum +=arr[i];
+}
+
+tempSum = maxSum
+for(let i=num;i<arr.length;i++){
+    tempSum = tempSum - arr[i-num] + arr[i];
+    maxSum = Math.max(maxSum,tempSum);
+}
+return maxSum;
+}
+
+maxSubArraySum([1,2,3,2,3,1,2,3,4,3,1],3);
+
+------------------------**********************------------------------
+
+Divide and Conquer:::
+
+This pattern involves dividing data set into smaller chunks and then repeating process with subset of data.
+This pattern can tremendously decrease time complexity.
+
+search([1,2,3,4,5,6],4)  // 3
+search([1,2,3,4,5,6],6)  //5
+search([1,2,3,4,5,6],11) // -1
+
+Normal Code::::
+
 
 
