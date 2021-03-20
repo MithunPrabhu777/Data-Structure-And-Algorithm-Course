@@ -770,5 +770,97 @@ search([1,2,3,4,5,6],11) // -1
 
 Normal Code::::
 
+function search(arr,num){
+    for(let i=0;i<arr.length;i++){
+        if(num == arr[i]){
+            return i;
+        }
+    }
+}
+
+search([1,5,3,4,7,8],7);
+
+-------------------************---------------
+
+Refactor::::
+
+Binary Search:::
+
+Time Complexity:::: log(N)
+
+function search(array,val){
+let min = 0;
+let max = array.length - 1;
+
+while(min<=max){
+    let middle = Math.floor((min+max)/2);
+    let currentElement = array[middle];
+
+    if(currentElement < val){
+         min = middle + 1;
+    }
+    else if (currentElement > val){
+        max = middle - 1;
+    }
+    else{
+        return middle;
+    }
+}
+return -1
+}
+
+
+search([2,3,4,5,6,7,8,9,10,11,12,14,15,17,19],14);
+
+----------------------------*********************--------------
+
+Recursion::::
+
+Objectives----
+
+1.Define what recursion is and how it can be used
+2.understand two essential components of recursive function
+3.visualize call stack to better debug and understand ecursive functions.
+4.use helper method recursion and pure reciursion to solve more difficult problems.
+
+what is recursion???
+
+A process (a function in our case) that calls itself.
+
+1.JSON.parse/JSON.stringify
+2.document.getElementById and DOM traversal algorithms
+3.Object Traversal
+4.we will see it with more complex data structures.
+5.It is sometimes cleaner alternative to iteration.
+
+But let's talk about functions
+In almost all program languages,there is built in DS that manages what happens when functions are invoked.Javascript calls THE CALL STACK.
+
+The Call Stack
+It is stack data structure- we will talk about that later!!!
+Any time function is invoked it is placed(pushed) on top of call stack
+When javascript sees return keyword or when function ends, compliler will remove(pop).
+
+function takeShower(){
+    return "Showering"
+}
+
+function eatBreakfast(){
+    let meal = cookFood();
+    return `Eating ${meal}`
+}
+
+function cookFood(){
+    let items = ["Oatmeal","Eggs","Protein Shake"]
+    return items[Math.floor(Math.random()*items.length)];
+}
+
+function wakeUp(){
+    takeShower();
+    eatBreakfast();
+    console.log("OK ready to go to work!!!")
+}
+
+wakeUp()
 
 
