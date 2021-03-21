@@ -768,6 +768,10 @@ search([1,2,3,4,5,6],4)  // 3
 search([1,2,3,4,5,6],6)  //5
 search([1,2,3,4,5,6],11) // -1
 
+-----------------------------*********************------------------------
+
+Day - 10
+
 Normal Code::::
 
 function search(arr,num){
@@ -863,4 +867,59 @@ function wakeUp(){
 
 wakeUp()
 
+Day - 11
 
+//Just go to browser console and hit the break point you want and see what happens in call stack. NOTE:Run Code before checking call stack. --- ctrl+Enter
+
+Why do I care for recursion???
+
+1.You're used to functions being pushed on call stack and popped off when they are done.
+2.When we write recursive functions,we keep pushing new functions onto call stack.
+
+How recursive functions work???
+Invoke same function with a different input until you reach your base case!!!
+
+This is most important concept to understand.
+
+Two esssential parts of recursive funtion!!!!
+1.Base case
+2.Different Inputs
+
+Our first recursive function.
+
+function countDown(num){
+if(num <= 0){
+    console.log("ALL DONE!!!");
+    return;
+}
+console.log(num);
+num--;
+countDown(num);
+}
+
+countDown(5);
+
+Another code with different approach!!!
+
+function countDown(num){
+for(let i = num;i>0;i--){
+    console.log(i);
+}
+console.log("All Done");
+}
+
+countDown(5);
+ ------------------**************----------------------
+ 
+Our second recursive function
+
+can you spot base case???
+Do you notice different input???
+What would happen if we didn't return???
+
+function sumRange(num){
+if(num === 1) return 1;
+return num + sumRange(num-1);
+}
+
+sumRange(4);
