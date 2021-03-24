@@ -923,3 +923,117 @@ return num + sumRange(num-1);
 }
 
 sumRange(4);
+
+Day-12 and Day-13 leave
+
+-----------------*******************-----------------------
+
+Day -14
+
+Now about factorial recursion
+
+function factorial(num){
+if(num === 1) return 1;
+return num * factorial(num-1);
+}
+
+factorial(4);
+
+------------------**************---------
+
+factorial normal code
+
+function factorial(num){
+let total = 1;
+for(let i=num; i>=1;i--){
+    total*=i;
+}
+return total;
+}
+
+Where things go wrong
+
+1.No Base.
+2.Forgetting to return or returning the wrong thing.
+3.STACK OVERFLOW -------    I.E     using console.log instead of return //maximum call stack exceedded
+
+-------------------****************---------------------
+
+HELPER METHOD RECURSION
+Helper method recursion will be used in storing value in form of array.
+
+Another Example
+
+Let's try to collect all of odd values in array.
+
+function collectOddValues(arr){
+let result = [];
+
+function helper(helperInput){
+if(helperInput.length === 0){
+    return
+}
+
+if(helperInput[0] % 2 !== 0){
+    result.push(helperInput[0])
+}
+
+helper(helperInput.slice(1))
+}
+
+helper(arr)
+
+return result;
+
+}
+
+collectOddValues([1,2,3,4,5,6,7,8,9]);
+
+---------------------************************---------------------------
+
+PURE RECURSION:::::::::::
+
+Pure Recursion Tips:  
+1.For arrays, use methods like slice,spread operator and concat that make copies of arrays so you don not mutate them.
+2.Remember that strings are immutable so you will need to use methods like slice,substr or substring to malke copies of strings.
+3.To make copies of objects use Object.assign or spread operator.
+
+function collectOddValues(arr){
+let newArray = [];
+
+if (arr.length === 0){
+    return newArray;
+}
+
+if(arr[0] % 2 !== 0){
+    newArray.push(arr[0]);
+}
+
+newArray = newArray.concat(collectOddValues(arr.slice(1)));
+return newArray;
+}
+
+
+collectOddValues([1,2,3,4,5,6,7,8,9]);
+
+-----------------------------************************----------------------------------
+
+Searching Algorithms------
+
+var usernames = ["tommy","mithun","manoj","palli","cricketta"]
+
+usernames.indexOf('palli'); //3
+
+usernames.indexOf('madhav') //-1
+
+Objectives----
+
+1.Describe what searching algorithm is
+2.Implement linear search on arrays
+3.Implement binary search on sorted arrays
+4.Implement naive string searching algorithm
+5.Implement KMP string searching algorithm.
+
+How do we search???
+
+Given an array, simplest way to search for value is to look at every element in array and check if it is value we want.
