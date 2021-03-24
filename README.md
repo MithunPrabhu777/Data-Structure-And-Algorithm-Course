@@ -1037,3 +1037,69 @@ Objectives----
 How do we search???
 
 Given an array, simplest way to search for value is to look at every element in array and check if it is value we want.
+
+Javascript has search!!!
+
+There are many different search methods on arrays in javascript:
+1.indexOf
+2.includes
+3.find
+4.findIndex
+
+But how do these functions work???
+
+usernames.includes('mithun') //true
+
+Linear Search PseudoCode
+1.This function accepts array and value
+2.Loop through array check if current array element is equal to value
+3.if it is,return index of elemnt at which it is found
+4.I fvalue is never found ,return -1
+
+function linearSearch(arr,num){
+for(let i=0;i<arr.length;i++){
+    if(arr[i] === num){
+        return i
+    }
+    continue
+}
+    return -1;
+}
+
+linearSearch([6,4,8,1,0,3],5);
+
+----------------------
+
+Linear Search Big O
+--------------------
+O(1) ---- Best
+O(n) ---- Worst
+O(n) ---- Average
+
+Binary Search
+--------------
+1.Binary search is much faster form of search
+2.Rather than eliminaating one element at a time,you can eliminate half of the remaining elements at atime.
+3.Binary search only works on sorted arrays!!!
+
+Concept behind binary searching is divide and conquer method.
+
+Divide And Conquer
+--------------------
+
+Binary Search Pseudocode
+-------------------------
+1.this function accepts a sorted array and a value
+2.Create a left pointer at start of array and a right pointer at end of array.
+3.While left pointer comes before the right pointer.
+    1.Create a pointer in middle
+    2.If you find value you want,return index
+    3.If value is too small,move left pointer up
+    4.If value is too large,move right pointer down.
+4.If you never find the value,return -1.
+
+
+
+
+
+
