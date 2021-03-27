@@ -1099,7 +1099,141 @@ Binary Search Pseudocode
 4.If you never find the value,return -1.
 
 
+function search(array,val){
+let min = 0;
+let max = array.length - 1;
+
+while(min<=max){
+    let middle = Math.floor((min+max)/2);
+    let currentElement = array[middle];
+
+    if(currentElement < val){
+         min = middle + 1;
+    }
+    else if (currentElement > val){
+        max = middle - 1;
+    }
+    else{
+        return middle;
+    }
+}
+return -1
+}
 
 
+search([2,3,4,5,6,7,8,9,10,11,12,14,15,17,19],14);
 
+Day - 15
+
+Binary Search ---  worst anfd average case O(logn) 
+                   best case O(1)
+		   
+Suppose we are searching for element in array of length 16 but element not in the array 
+
+16 elements = 4 steps
+
+To add another "step", we needto double number of elements
+
+total 32 elements = 5 steps
+
+-------------------------**********---------------
+
+Naive String Search
+-------------------
+
+Long String: wowomgzomg              Short String: omg
+
+wowomgzomg  ---- count 2
+
+Suppose you want to count number of times substring enccountered in main string
+
+
+Pseudocode:
+1.Loop over longer string
+2.Loop over shorter string
+3.If characters do not match,break out of inner loop.
+4.If characters do match,break out of inner loop
+5.If you complete inner loop and find match,increment count of matches
+6.return count.
+
+function naiveSearch(long,short){
+    let count = 0;
+    for(let i=0;i<long.length;i++){
+        for(j = 0;j<short.length;j++){
+            console.log(long[i+j],short[j]);
+            if(short[j] !== long[i+j]) break; 
+            if(j === short.length - 1) count++;
+        }
+    }
+    return count;
+}
+
+naiveSearch("lolie loled","lol");
+
+ELementary Sorting Algorithms:
+------------------------------
+
+Sorting is process of rearraging items in collection (e.g array) so that items are in some kind of order.
+
+Examples:
+1.Sorting numbers from smallest to largest
+2.sorting names alphabetically
+3.Sorting movies based on release date.
+
+Why do we need to learn this???
+1.Sorting is incredibly common task,so it is good to know how it works
+2.There are many different ways to sort things, and different tehniques have their own dvantages and disadvantages.
+
+Objectives::
+1.Implement bubble sort
+2.Implement selection sort
+3.implement insertion sort
+4.Understaand why it is important to learn these simpler sorting algorithms.
+
+Javascript has a sort method...
+-------------------------------
+
+Yes,it does!!!!
+...but it doesn't always work the way you expect
+
+['sttele',"colt","DS","Algorithms"].sort();
+
+//It will give back sorted array
+
+[6,4,15,10].sort();
+
+//[10,15,4,6]  /// Not properly sorted.//unicode represents string so every item is converted into string. then it is sorted so it is bizarre.
+
+Telling Javascript how to sort
+------------------------------
+1.Built-in sort method accepts optional comparator function
+2.you can use this comparator function to tell javascript how you want it to sort.
+3.comparator looks at pairs of elements (a and b),determines their sort order based on return value.
+       1.If it returns negative number,a should come before b.
+       2.If it returns a positive number, ashould come after b.
+       3.If it returns 0,a and b are same as far as sort is concerned.
+
+Telling Javascript how to sort
+
+Examples::
+-----------
+
+function numberCompare(num1,num2){
+return num1 - num2;
+}
+
+[6,4,15,10].sort(numberCompare)    // [4,6,10,15]
+
+-----------------------------------
+
+function compareByLen(str1,str2){
+return str2.length - str1.length;
+}
+
+["Steele","Colt","DS","Algo"].sort(compareByLen)       //ordering it by length of string.
+
+BUBBLESORT
+-----------
+
+A sorting algorithm where largest values bubble up to top!!!
 
