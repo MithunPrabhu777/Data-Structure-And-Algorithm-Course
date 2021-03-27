@@ -1237,3 +1237,14 @@ BUBBLESORT
 
 A sorting algorithm where largest values bubble up to top!!!
 
+[5,3,4,1,2]           
+
+[3,5,4,1,2]
+
+[3,4,5,1,2]
+
+[3,4,1,5,2]
+
+[3,4,1,2,5]
+
+1 - iteration
