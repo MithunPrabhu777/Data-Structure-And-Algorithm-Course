@@ -1170,6 +1170,8 @@ function naiveSearch(long,short){
 
 naiveSearch("lolie loled","lol");
 
+Day -16 and Day - 17
+
 ELementary Sorting Algorithms:
 ------------------------------
 
@@ -1248,3 +1250,100 @@ A sorting algorithm where largest values bubble up to top!!!
 [3,4,1,2,5]
 
 1 - iteration
+
+Before we sort,we must swap!!!
+Many sorting algorithms involve some type of swapping functionality (e.g swapping to numbers to put them i order)
+
+//ES5
+function swap(arr,idx1,idx2){
+let temp = arr[idx1];
+arr[idx1] = arr[idx2];
+arr[idx2] = temp;
+}
+
+//ES2015
+
+const swap = (arr,idx1,idx2) => {
+[arr[idx1],arr[idx2]] = [arr[idx2],arr[idx1]];
+}
+
+BubbleSort Pseudocode::
+------------------------
+
+1.Start looping from with a variable called i the end of array towards beginning.
+2.start inner loop with variable called j from beginning until i -1
+3.If arr[j] is greater than arr[j+1],swap those two values!!!
+4.Return a sorted array!!!
+
+function bubbleSort(arr){
+for(let i=0;i<arr.length;i++){
+    for(let j=0;j < arr.length ; j++){
+        if(arr[j] > arr[j+1]){
+            temp = arr[j];
+            arr[j] = arr[j+1];
+            arr[j+1] = temp;
+        }
+    }
+}
+return arr
+
+}
+
+bubbleSort([37,45,25,81]);
+
+---------------------*****************---------------------
+
+Another approach for bubblesort
+-------------------------------
+
+function bubbleSort(arr){
+
+for(let i = arr.length; i > 0 ;i--){
+    for(let j = 0 ; j < i - 1; j++){
+        if(arr[j]>arr[j+1]){
+             [arr[j+1],arr[j]] = [arr[j],arr[j+1]]
+        }
+    }
+}
+    return arr
+}
+
+bubbleSort([7,3,0,1,8,4,3,74,6])
+
+---------------------------------------------------
+Optimized  code with noSwap
+----------------------------
+
+function bubbleSort(arr){
+let noSwap = true
+for(let i = arr.length; i > 0 ;i--){
+    for(let j = 0 ; j < i - 1; j++){
+        if(arr[j]>arr[j+1]){
+             [arr[j+1],arr[j]] = [arr[j],arr[j+1]]
+             noSwap = false;
+        }
+    }
+    if(noSwap) break;
+}
+    return arr
+}
+
+bubbleSort([7,3,0,1,8,4,3,74,6])
+}
+
+------------------------------------------------------
+
+Selection Sort
+---------------
+
+Similar to bubble sort,but instead of first placing large values into sorted position,it places small values into sorted position.
+
+Selection Sort Pseudocode
+--------------------------
+1.Store first element as smallest value you have seen so far.
+2.Compare this item to next item in array until you find a smaller number
+3.If smaller number is found,designate smaller number to be the new "minimum"  and continue until end of array.
+4.If "minimum" is not value(index) you initially began with,swap two values.
+5.Repeat this with the next element until array is sorted.
+
+
