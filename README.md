@@ -1346,4 +1346,122 @@ Selection Sort Pseudocode
 4.If "minimum" is not value(index) you initially began with,swap two values.
 5.Repeat this with the next element until array is sorted.
 
+Day - 18
+---------
+
+function selectionSort(arr){
+   // const swap = (arr,idx1,idx2) => [arr[idx2],arr[idx1] = arr[idx1], arr[idx2]]
+for(let i=0; i <arr.length;i++){  
+    let min = i; 
+    for(let j = i+1;j < arr.length;j++){  
+        if(arr[j]<arr[min]){  
+           min = j    
+           console.log(arr[min])
+        }
+    }
+    if(i !== min){
+        let temp = arr[i]
+        arr[i] = arr[min]
+        arr[min] = temp
+    }
+       
+}
+ return arr;
+}
+
+selectionSort([34,22,10,19,17]);
+
+--------------********************------------------------
+
+Insertion Sort
+--------------
+Builds up sort by gradually creating a larger left halfwhich is always sorted.
+
+Insertion Sort Pseudocode
+-------------------------
+1.Start by picking second element in array
+2.Now compare second element with one before it and swap if necessary
+3.continue to next element and if it is incorrect order,iterate through sorted portion
+4.repeat until array is sorted.
+
+function insertionSort(arr){
+for(var i=1;i<arr.length;i++){
+    var currentVal = arr[i];
+    for(var j = i-1; j>= 0 && arr[j] > currentVal;j--){
+        arr[j+1] = arr[j]
+    }
+    arr[j+1] = currentVal;
+    console.log(arr)
+}
+return arr;
+}
+
+insertionSort([2,1,9,76,4]);
+
+Big O of sorting Algorithms
+----------------------------
+
+                         Best                      Average                Worst            Space Complexity
+Bubble Sort             O(n)                      O(n^2)                   ''                    O(1)
+Insertion Sort          O(n)                      ''                       ''                     ''
+Selection Sort          O(n^2)                    ''                      ''                       ''
+
+Recap
+1.Sorting is fundamentAL
+2.Bubble sort,selection sort and insertion sort are all roughly equivalent.
+3.All have average time complexity that are quadratic
+4.We can do better... but we need more complex algorithms!!!
+
+Intermediate Sorting Algorithms
+--------------------------------
+Objectives
+-----------
+1.Understand limitations of sorting algorithms we've learned so far.
+2.Implement merge sort
+3.Implement quick sort
+4.Implement radix sort
+
+Why Learn This???
+------------------
+1.Sorting algorithms we've learned so far don't scale well
+2.Try out bubble sort on array of 1000000 elements,it will take quite some time!!
+
+Faster Sorts
+------------
+1.There is family of sorting algorithms thatr can improve time complexity from O(n^2) to O(n logn)
+2.There's a tradeoff between efficiency and simplicity
+3.The more efficient algorithms are much less simple, and generally take longer to understand.
+4.Let's dive in!!!
+
+Merge Sort
+-----------
+1.It is combination of two things - merging and sorting!!!
+2.Exploits fact that arrays of 0 or 1 element are always sorted.
+3.Works by decomposing aray into smaller arrays of 0 or 1 elements, then building up a newly sorted array.
+
+How does it work???
+-------------------
+[8,3,5,4,7,6,1,2]
+[8,3,5,4]   [7,6,1,2]
+[8,3] [5,4]  [7,6] [1,2]
+[8] [3] [5] [4] [7] [6] [1] [2]
+[3,8] [4,5]  [6,7]  [1,2]
+[3,4,5,8]  [1,2,6,7]
+[1,2,3,4,5,6,7,8]
+
+Merging Arrays
+----------------
+1.In order to implement merge sort, it is useful to first implement a function responsible for merging two sorted arrays.
+2.Given two arrays which are sorted, this helper function ahould create a new array which is also sorted, and consists of all of elements in two input arrays.
+3.This function should run in O(n+m) time and O(n+m) space and should not modify parameters passed to it.
+
+
+Merging Arrsys Pseudocode
+-------------------------
+1.Create empty array,take a look at smallest values in each input array.
+2.While there are still values we haven't looked at...
+      1.If value in first array is smaller than value in second array.push value in first array into our results and move on to next value in first array.
+      2.If value in first array is larger than value in second array,push value in second array into our results and move on to next value in second array.
+      3.Once we exhaust one array, push in all remaining values from other array.
+
 
