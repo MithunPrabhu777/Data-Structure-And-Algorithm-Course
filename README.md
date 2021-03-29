@@ -1464,4 +1464,83 @@ Merging Arrsys Pseudocode
       2.If value in first array is larger than value in second array,push value in second array into our results and move on to next value in second array.
       3.Once we exhaust one array, push in all remaining values from other array.
 
+function merge(arr1,arr2){
+let result = [];
+let i=0;
+let j=0;
+while(i<arr1.length && j<arr2.length){
+if(arr1[i] < arr2[j]){
+    result.push(arr1[i])
+    i++;
+}
+else{
+    result.push(arr2[j]);
+    j++;
+}
+}
+while(i<arr1.length){
+    result.push(arr1[i]);
+    i++;
+}
+while(j<arr2.length){
+    result.push(arr2[j])
+    j++
+}
+return result;
+}
 
+merge([2,67,44],[7,3,5]);
+
+MergeSort PseudoCode
+---------------------
+1.Break up array into halves until you have arrays that are empty or have one element
+2.Once you have smaller sorted arrays,merge those arrays with other aorted arrays until you are back at full length of array
+3.Once array has been merged back together, return merged(and sorted) array.
+
+
+function mergeSort(arr){
+    if(arr.length <=1) return arr;
+    let mid = Math.floor(arr.length/2);
+    let left = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left,right);
+}
+
+
+Final Code:
+
+function merge(arr1,arr2){
+let result = [];
+let i=0;
+let j=0;
+while(i<arr1.length && j<arr2.length){
+if(arr1[i] < arr2[j]){
+    result.push(arr1[i])
+    i++;
+}
+else{
+    result.push(arr2[j]);
+    j++;
+}
+}
+while(i<arr1.length){
+    result.push(arr1[i]);
+    i++;
+}
+while(j<arr2.length){
+    result.push(arr2[j])
+    j++
+}
+return result;
+}
+
+
+function mergeSort(arr){
+    if(arr.length <=1) return arr;
+    let mid = Math.floor(arr.length/2);
+    let left = mergeSort(arr.slice(0,mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left,right);
+}
+
+mergeSort([2,3,,8,5,0,7,1]);
