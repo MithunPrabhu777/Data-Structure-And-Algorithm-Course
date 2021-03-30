@@ -1412,6 +1412,8 @@ Recap
 3.All have average time complexity that are quadratic
 4.We can do better... but we need more complex algorithms!!!
 
+Day -19
+
 Intermediate Sorting Algorithms
 --------------------------------
 Objectives
@@ -1544,3 +1546,112 @@ function mergeSort(arr){
 }
 
 mergeSort([2,3,,8,5,0,7,1]);
+
+Day - 20
+---------
+
+Big O of MergeSort
+------------------
+
+Time complexity Best/Average/worst  --- O(n logn)
+Space Compexity --- O(n)
+
+O(logn) ---------------------- DECOMPOSITIONS
+
+O(n)   ----------------------- Comparisions per decomposition.
+
+O(logn) + O(n) ---- O(n logn)
+
+Quick Sort
+-----------
+
+1.Like merge sort,exploits fact that arrays of 0 or 1 are always sorted.
+2.works by selecting one element("pivot") and finding index where pivot should end up in sorted arrray.
+3.Once pivot is positioned appropriately,quick sort can be on weither side of pivot.
+
+
+How does it work ???
+
+[5,2,1,8,4,7,6,3]  // 5 is pivot
+
+[2,1,4,3]   5    [8,7,6]
+
+[1]   2  [4,3]   5   [7,6]  8
+
+[1]  [2]   [3]  4   5   [6]   7   [8]
+
+[1]  [2]   [3]  [4]  [5]  [6]  [7]  [8]
+
+Pivot Helper
+-------------
+1.In order to implement merge sort,it is udeful to first implement function responsible arranging elements in array on either side of pivot.
+2.Given an array,this helper function should designate an element as pivot.
+3.It should then  rearrange elements in array so that all values less than pivot are moved to left of pivot and all values greater than pivot are moved to right of pivot.
+4.Order of elements on either side of pivot doesn't matter!!!
+5.The helper should do this in place,that is ,it should not create a new array
+6.When complete,helper should return index of pivot.
+
+Picking a pivot
+----------------
+1.The runtime of quick sort depends in part on how one selects pivot.
+2.Ideally,pivot should be chosen so that it is roughly median value in data set you're sorting.
+3.For simplicity,we'll always choose pivot to be first element 
+
+Pivot Helper Example
+---------------------
+
+let arr = [5,2,1,8,4,7,6,3]
+
+pivot(arr);  //4
+
+anything you can select as pivot and mutation of array will be created .
+
+Pivot Psudeocode
+-----------------
+1.It will help to accept three arguments: array,start index and end index (these can default 0 and array length - 1 respectively )
+2.Grab pivot from start array
+3.Store current pivot index in variable (thius will keep track of where pivot should end up)
+4.Store through array start until end
+    1.If pivot is greater than current element,increment pivot index variable and then swap current eleemnt with element at pivot index.
+5.swap starting element with pivot index
+6.return pivot index
+
+function pivot(arr,start = 0,end=arr.length+1){
+    function swap(array,i,j){
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp
+    }
+
+var pivot = arr[start];
+var swapIdx = start;
+
+for(var i = start + 1; i < arr.length; i++){
+    if(pivot > arr[i]){
+        swapIdx++;
+        swap(arr,swapIdx,i)
+    }
+}
+swap(arr,start,swapIdx);
+return swapIdx;
+}
+
+
+QuickSort Pseudocode
+---------------------
+1.call the pivot helper on array
+2.when helper returns to you updated pivot index,reccursively call pivot helper on subaaray to left of that index,and subarray to right of that index.
+3.
+
+function quickSort(arr,left=0,right=arr.length - 1){
+    if(left < right){
+    let pivotIndex = pivot(arr,left,right);
+    //left
+    quickSort(arr,left,pivotIndex-1);
+    //right
+    quickSort(arr,pivotIndex+1,right);
+    }
+return arr;
+}
+
+quickSort([4,8,2,1,5,7,6,3]);
