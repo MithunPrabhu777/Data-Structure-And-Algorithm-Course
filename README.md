@@ -1655,3 +1655,177 @@ return arr;
 }
 
 quickSort([4,8,2,1,5,7,6,3]);
+
+Final code
+----------
+
+function pivot(arr,start = 0,end=arr.length+1){
+    function swap(array,i,j){
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp
+    }
+
+var pivot = arr[start];
+var swapIdx = start;
+
+for(var i = start + 1; i < arr.length; i++){
+    if(pivot > arr[i]){
+        swapIdx++;
+        swap(arr,swapIdx,i)
+    }
+}
+swap(arr,start,swapIdx);
+return swapIdx;
+}
+
+function quickSort(arr,left=0,right=arr.length - 1){
+    if(left < right){
+    let pivotIndex = pivot(arr,left,right);
+    //left
+    quickSort(arr,left,pivotIndex-1);
+    //right
+    quickSort(arr,pivotIndex+1,right);
+    }
+return arr;
+}
+
+quickSort([4,8,2,1,5,7,6,3]);
+
+
+Day-21 skipped
+--------------
+
+Day - 22
+--------
+Big O of Quicksort
+
+Best nlogn  Average  nlogn   worst n^2   space-complexity  logn
+
+Big O of Quicksort
+------------------
+worst case
+----------
+
+[1,2,3,4,5,6,7,8,9]  // If it is already sorted 
+
+O(n) decomposition
+O(n) comparisions per decomposition
+
+COMPARISION SORTS
+------------------
+
+Average Time Complexity
+Bubble Sort - O(n^2)
+Insertion Sort - O(n^2)
+Selection Sort - O(n^2)
+Quick Sort - O(n logn)
+Merge Sort - O(n logn)
+
+Can we do better????
+
+Yes,But not by making comparisions.
+
+RADIX SORT
+-----------
+
+1.Radix sort is special sorting algorithm that works on lists of numbers.
+2.It never makes comparisions between elements!!
+3.It exploits fact that information about size of number is encoded in number of digits
+4.More digits means bigger number.
+
+How does it work???
+
+create 10 different buckets
+
+[1556,4,3556,593,408,4386,902,7,8157,86,9637,29]
+
+                                                              86
+                                                              4386        9637
+                                                              3556        8157
+		     902        593        4                  1556         7        408        29
+ 
+0        1            2          3         4          5          6         7         8          9       
+
+[902,593,4,1556,3556,4386,86,7,8157,9637,408,29]
+
+                                                                 
+408                                                  8157             
+7                                                    3556                           86
+4		     29        9637                  1556                           4386       593
+902 
+
+0        1            2          3         4          5          6         7         8          9    
+
+
+continue....
+
+we will get sorted array.
+
+Radix Sort Helpers
+--------------------
+In order to implement radix sort,it is helpful to build a few helper functions first:
+
+getDigit(num,place) - returns digit in num at given place value
+
+getDigit(12345,0);   // 5
+getDigit(12345,1);   // 4
+getDigit(12345,2);   // 3
+getDigit(12345,3);   // 2
+getDigit(12345,4);   // 1
+getDigit(12345,5);   // 0
+
+Radix Sort Helpers
+------------------
+In order to implement radix sort, it is helpful to build a few helper functions first:
+
+getDigit(num,place) - returns digit in num at given place value
+
+function getDigit(num,i){
+return Math.floor(Math.abs(num) / Math.pow(10,i)) % 10;
+}
+
+Radix Sort Helpers
+-------------------
+
+digitCount(num) - returns number of digits in num
+
+digitCount(1);  // 1
+digitCount(15);  // 2
+digitCount(314);  // 3
+
+function digitCount(num) {
+    if(num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+Radix Sort Helpers
+-------------------
+mostDigits(nums) - given array of numbers, returns number of digits in largest numbers in list.
+
+mostDigits([1234,56,7]);  // 4
+mostDigits([1,1,11111,1]);  // 5
+mostDigits([12,34,56,78]);  // 2
+
+function mostDigits(nums){
+    let maxDigits = 0;
+    for(let i = 0;i<nums.length;i++){
+         maxDigits= Math.max(maxDigits,digitCount(nums[i]));
+    }
+    return maxDigits;
+}
+
+mostDigits([23,567,89,12332453,53534])
+
+Radix Sort Pseudocode
+----------------------
+1.Define a function that accepts list of numbers
+2.Figure out how many digits largest number has
+3.Loop from k=0 to largest number of digits
+4.For each iteration of loop:
+   1.Create buckets for each digit(0 to 9)
+   2.place each number in corresponding bucket based on its kth digit.
+5.Replace our existing array with values in our buckets,starting with 0 and going up to 9
+6.return list at the end!!!
+
+
