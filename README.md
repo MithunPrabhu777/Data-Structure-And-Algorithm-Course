@@ -1828,4 +1828,156 @@ Radix Sort Pseudocode
 5.Replace our existing array with values in our buckets,starting with 0 and going up to 9
 6.return list at the end!!!
 
+function getDigit(num,i){
+return Math.floor(Math.abs(num) / Math.pow(10,i)) % 10;
+}
+
+//getDigit(1211,2);
+
+function digitCount(num) {
+    if(num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+}
+
+//digitCount(0)
+
+function mostDigits(nums){
+    let maxDigits = 0;
+    for(let i = 0;i<nums.length;i++){
+         maxDigits= Math.max(maxDigits,digitCount(nums[i]));
+    }
+    return maxDigits
+}
+
+Day - 23
+--------
+
+function radixSort(nums){
+    let maxDigitCount = mostDigits(nums);
+    for(let k = 0; k < maxDigitCount ; k++){
+        let digitBuckets = Array.from({length:10}, () => [])
+        for(let i=0; i<nums.length;i++){
+            let digit = getDigit(nums[i],k);
+            digitBuckets[digit].push(nums[i]);
+        }
+         nums = [].concat(...digitBuckets)
+    }
+    return nums;
+}
+
+radixSort([23,345,5467,12,2345,9853]);
+
+
+RADIX SORT BIG O
+-----------------
+
+Time Complexity -  Best - O(nk)   average and worst
+
+space complexity -- O(n+k)
+
+-----------------------------*************************----------------------------------
+
+Data Structures
+---------------
+
+Turning Point In the Course
+---------------------------
+
+What do they do???
+-------------------
+Data structures are collections of values, relationships amnog them, and functions or operations that can be applied to data.
+
+Why so Many???
+--------------
+Different data structures excel at different things.Some are highly specialized,while others (like arrays) are more generally used.
+
+Why Care???
+-----------
+The more time you spend a developer,more likely you'll need to use one of these data structures.
+You've already worked with many of them unknowingly!!!
+And of course..... INTERVIEWS
+
+THERE IS NO ONE "BEST" DATA STRUCTURE
+
+specialized in different situations.
+
+why bother learning them all???
+
+working with map/location data????? ///we use graphs here
+
+If need an ordered list with fast inserts/removals at beginning and end????  // use a linked list
+
+Web scraping nested HTML??? // Use a tree!!!
+
+Need to write a scheduler??? // Use a binary heap
+
+OK,Let's get going
+
+There is ton of content to take in here...
+don't get overwhelmed trying to master it all at once.
+
+ES2015 syntax that we'll use along he way.
+
+ES2015 CLASS SYNTAX
+-------------------
+
+Objectives
+----------
+1.Explain what class is
+2.Understand how javascript implements idea of classes
+3.Define terms like abstraction,encapsulation and polymorphism.
+4.Use ES2015 classes to implement data structures.
+
+What is a class???
+A blueprint for creating objects with pre-defined properties and methods.
+
+Why do we need to learn this?
+We're going to implement data structures as classes
+
+THE SYNTAX
+----------
+
+class Student{
+constructor(firstName,lastName){
+this.firstName = firstName;
+this.lastName = lastName;
+}
+}
+
+The method to create new objects must be called constructor.
+
+Classkeyword creates a constant, so you can not redefine it. Watch out for syntax as well!!!
+
+---------------**********-------------------
+
+class Student{
+constructor(firstName,lastName){
+this.firstName = firstName;
+this.lastName = lastName;
+}
+}
+
+let firstStudent = new Student("colt","Steele");   // we use new keyword
+let secondStudent = new Student("Blue","Steele");  //We can new Instance for class called as object.
+
+Instance Methods
+-----------------
+
+class Student{
+constructor(firstName,lastName){
+this.firstName = firstName;
+this.lastName = lastName;
+}
+
+fullName(){
+return `Your full name is ${this.firstName}  ${this.lastName}`
+}
+
+let firstStudent = new Student("Mithun","Prabhu");
+firstStudent.fullName();
+
+
+}
+}
+
 
