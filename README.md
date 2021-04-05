@@ -1976,8 +1976,153 @@ return `Your full name is ${this.firstName}  ${this.lastName}`
 let firstStudent = new Student("Mithun","Prabhu");
 firstStudent.fullName();
 
+}
+}
 
+Day-24,25 and Day-26
+---------------------
+
+class Student{
+constructor(firstName,lastName){
+this.firstName = firstName;
+this.lastName = lastName;
+this.tardies = 0;
+this.scores = [];
+}
+
+fullName(){
+return `Your full name is ${this.firstName} ${this.lastName}`
+}
+
+markTardies(){
+    this.tardies +=1
+    if(this.tardies < 3){
+            return `${this.firstName} ${this.lastName} is late for ${this.tardies} times`
+    }
+    return "YOU ARE EXPELLED"
+}
+
+addScore(score){
+this.scores.push(score);
+return this.scores;
+}
+
+calculateAverage(){
+    let sum = this.scores.reduce(function(a,b) {return a + b});
+    return sum/this.scores.length;
 }
 }
+
+let firstStudent = new Student("Mithun","Prabhu")
+firstStudent.fullName();
+firstStudent.markTardies();
+firstStudent.addScore(25);
+
+class Methods
+-------------
+
+Static method which can't be accessed with instance ,,,only accessable with class.
+
+class Student{
+constructor(firstName,lastName){
+this.firstName = firstName;
+this.lastName = lastName;
+this.tardies = 0;
+this.scores = [];
+}
+
+fullName(){
+return `Your full name is ${this.firstName} ${this.lastName}`
+}
+
+markTardies(){
+    this.tardies +=1
+    if(this.tardies < 3){
+            return `${this.firstName} ${this.lastName} is late for ${this.tardies} times`
+    }
+    return "YOU ARE EXPELLED"
+}
+
+addScore(score){
+this.scores.push(score);
+return this.scores;
+}
+
+calculateAverage(){
+    let sum = this.scores.reduce(function(a,b) {return a + b});
+    return sum/this.scores.length;
+}
+
+static enrollmentStudents(){
+    return "Enrolling Stdents";
+}
+}
+
+let firstStudent = new Student("Mithun","Prabhu")
+firstStudent.fullName();
+firstStudent.markTardies();
+//firstStudent.addScore(25);
+Student.enrollmentStudents();
+
+Aother Example
+--------------
+
+How we'll be using classes
+---------------------------
+class DataStructure(){
+constructor(){
+//whatb default properties should it have???
+}
+someInstanceMethod(){
+//what should each object created from this class be able to do???
+}
+}
+
+we will be using constructor and instance methods quite aa bit!!!
+
+we will almost never be using static methods.
+
+Onre gotchA with 'this'
+-----------------------
+Inside all of our instance methods and constructors, keyword 'this' refers to object created from class(also known as instance);
+
+Recap
+-----
+
+1.Classes are blueprints that when created make objects known as instances.
+2.Classes are created with new keyword
+3.constuctor function is special function that gets run when class is insatntiated.
+4.Instance methods can be added to classes similar to methods in objects.
+5.class emethods can be added using static keyword.
+
+-------------------------------******************************----------------------------
+
+SINGLY LINKED LISTS
+--------------------
+
+Objectives:
+-----------
+1.Define what a singly linked list is
+2.compare and contrast linked lists and arrays
+3.implement insertion,removal and traversal methods on singly linked lists.
+
+What is a linked list???
+1.A data structure that contains head,tail and length property.
+2.Linked Lists consist of nodes and each node has value and pointer to another node or null.
+
+Comaprision with arrays
+------------------------
+lists
+-----
+1.Do not have indexes!!!
+2.Connected via nodes with next pointer.
+3.Random access is not allowed.
+
+Arrays
+------
+1.Indexed in order!!!
+2.Inserton and deletion can be expensive.
+3.can quickly be accessed at specific index.
+
 
 
