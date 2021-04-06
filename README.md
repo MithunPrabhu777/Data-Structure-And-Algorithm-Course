@@ -2125,4 +2125,175 @@ Arrays
 3.can quickly be accessed at specific index.
 
 
+Day -27
+-------
+
+First approach
+--------------
+
+class Node {
+    constructor(){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+var first = new Node("Hi");
+first.next = new Node("there");
+first.next.next = new Node("How are you??");   // Not useful
+
+Pushing
+-------
+Adding a new node to the end of the linked list!!!
+
+Pushing Pseudocode
+-------------------
+1.This function should accept a value
+2.Create a new node using value passed to function
+3.If there is no head property on list, set head and tail to be newly created node.
+4.Othewise set next property on the tail to be the new node and set tail property on list to be newly created node.
+5.Increment the length by one
+
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+}
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+Popping
+--------
+
+Removing a node from end of the linked list
+
+
+Before removing last node from list we need to traverse from one end to another
+----------------------------------------------------------------------------------
+
+    traverse(){
+        var current = this.head;
+        while(current){
+            console.log(current.value);
+            current = current.next;
+        }
+    }
+    
+ Popping Pseudocode
+ -------------------
+ 1.If there are no nodes in the list return undefined.
+ 2.Loop through list until you reach tail
+ 3.Set next property of 2nd to last node to be null
+ 4.set tail to be 2nd last node
+ 5.Decrement length of list by 1
+ 6.return value of node removed
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+pop
+-----
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+
+
+}
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+Shifting
+--------
+Removing new node from beginning of linked list
+
+Shifting Pseudocode
+-------------------
+
+1.If there are no nodes,return undefined
+2.Store current head property in variable
+3.Set head property to be current head's next property.
+4.Decrement length by 1
+5.Return value of node removed.
 
