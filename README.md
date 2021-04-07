@@ -2297,3 +2297,411 @@ Shifting Pseudocode
 4.Decrement length by 1
 5.Return value of node removed.
 
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+
+}
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+
+Unshift
+-------
+Adding a new node to the beginning of the linked list.
+
+Unshifting Pseudocode
+---------------------
+1.This function should accept a value
+2.Create a new node using value passed to function.
+3.If there is no head property on lst,set head and tail to be newly created node.
+4.Otherwise set newly created node's next property to be current head property on list.
+5.Set head property on lsit to be that newly created node.
+6.Increment length of the list by 1.
+7.Return linked list.
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+    unshift(value){
+        var newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        else{      
+       newNode.next =  this.head;
+       this.head = newNode;
+       }
+       this.length++;
+       return this;
+    }
+}
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+Get
+---
+Retrieving a node by it's position in the linked list.
+
+Pesudocode
+----------
+1.This function should accept index
+2.if index is less than zero or greater than or equal to length of the list,return null
+3.Loop through list until you reach index and return node at specific index.
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+    unshift(value){
+        var newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        else{      
+       newNode.next =  this.head;
+       this.head = newNode;
+       }
+       this.length++;
+       return this;
+    }
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        var counter = 0;
+        var current = this.head;
+        if(counter !== index){
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+}
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+Set
+----
+Changing value of node based on it's postion in linked list.
+
+pseudocode
+----------
+1.This function should accept value and index
+2.use your get function to find specific node
+3.If node is not found,return false
+4.If node is found,set value of node to be value passed to function and return true.
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+    unshift(value){
+        var newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        else{      
+       newNode.next =  this.head;
+       this.head = newNode;
+       }
+       this.length++;
+       return this;
+    }
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        var counter = 0;
+        var current = this.head;
+        if(counter !== index){
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+    set(index,value){
+        var foundNode = this.get(index);
+        if(foundNode){
+            foundNode.value = value;
+            return true;
+        }
+        return false;
+    }
+}
+
+
+var list = new SinglyLinkedList();
+list.push("HELLO!");
+list.push("GoodBye!!!");
+
+Insert
+-------
+
+Adding new nodeto linked list at specific position
+
+Insert Pseudocode
+------------------
+1.If index is less than zero or greater than length,return false
+2.If index is same as length,push a new node to end of list
+3.If index is 0,unhift a new node to start of list
+4.Otherwise,using get method,access node at index -1 .
+5.set next property on that node to be new node.
+6.set next property on new node to be previoius next.
+7.increment length
+8.return true
+
+
+
