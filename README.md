@@ -3146,7 +3146,312 @@ Recap
 2.Arrays contain built in index wheas linked lists do not.
 3.The idea of list data structure that contains of nodes is foundation of other data structures like stacks abd queues.
 
-Day - 30
----------
+Day - 30 and 31
+----------------
+
 Doubly Linked Lists
 -------------------
+Objectives
+----------
+1.contruct a doubly linked list
+2.comapre and contrast doubly and singly linked list
+3.Implement basic operations on doubly linked lists.
+
+We know what lists are but doubly...?
+Almost identical to singly linked lists,except every node has another pointer, to previous node!!!
+
+Comparisions with Singly Linked Lists
+---------------------------------------
+More Memory === More flexibility
+It's almost always a tradeoff!!!
+
+Pushing
+-------
+Adding a node to the end of the doubly linked list.
+
+Pushing pseudocode
+-------------------
+1.Create a node with value passed to function
+2.If head property is null set head and tail to be newly creataed node.
+3.If not, set next property on tail to be that node 
+4.set previous property of newly created node to be the tail.
+5.set tail to be newly created node.
+6.Increment the length
+7.return doubly linked list.
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+    
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+}
+
+popping
+-------
+Removing a node from end of the doubly linked list.
+
+Popping Pseudocode
+-------------------
+1.If there is no head,return undefined.
+2.Store the current tail in a variable to return later.
+3.If length is 1,set head and tail to be null
+4.Update the tail to be the previous node
+5.set newTail's next to null
+6.decrement length
+7.return value removed
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+}
+
+
+Shifting
+---------
+Removing a node from beginning of doubly linked list
+
+Shift Pseudocode
+----------------
+1.If length is 0, return undefined
+2.store current head property in variable (we'll call it old head)
+3.if length is 1, set head and tail to null
+4.update head to be next of old head
+5.set head's prev property to null
+6.set old head's next to null
+7.decrement length
+8.return old head
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+   
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+unshifting
+-----------
+Adding a node to the beginning of the doubly linked list
+
+Unshifting Pseudocode
+----------------------
+1.Create a new node with value passed to function 
+2.If length is 0,set head to be new node and set tail to be new node
+3.Otherwise,set prev property of head of list to be new node , set next property of newnode to be head property ,  update head to be newnode
+4.Increment length
+5.return list
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+    
+    unshift(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+     }
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+Get
+----
+Accessing a node in adoubly linked list by its position.
+
+Pseudocode Get
+---------------
+1.If index is less than 0 or greater or equal to length,return null
+2.If index is less than or equal to half length of list,loop through list starting from head and loop towards middle,return node once it is found.
+3.If index is greater than or equal to half length of list,loop through list starting from tail and loop towards middle,return node once it is found.
+
