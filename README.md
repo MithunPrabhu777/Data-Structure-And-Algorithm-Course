@@ -3455,3 +3455,534 @@ Pseudocode Get
 2.If index is less than or equal to half length of list,loop through list starting from head and loop towards middle,return node once it is found.
 3.If index is greater than or equal to half length of list,loop through list starting from tail and loop towards middle,return node once it is found.
 
+Day - 32
+----------
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+     }
+     get(index){
+         if(index < 0 || index >= this.length  ){
+             return null
+         }
+         if(index <= this.length/2){
+             console.log("Working from head")
+         var count = 0;
+         var current = this.head;
+         while(count != index){
+             current = current.next;
+             count++;
+         }}
+         else{
+             console.log("Working FROM TAIL")
+             var count = this.length - 1;
+             var current = this.tail;
+             while(count != index){
+                 current = current.prev;
+                 count--;
+             }
+         }
+         return current;
+     }
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+set
+----
+Replacing a value of node to doubly linked list.
+
+Pseudocode set
+--------------
+1.create a variable which is result of get method at index passed to function.
+    1.If get method returns a  valid node,set value of that node to be value passed to function.
+    2.return true
+2.Otherwise,return false
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+     }
+     get(index){
+         if(index < 0 || index >= this.length  ){
+             return null
+         }
+         if(index <= this.length/2){
+             console.log("Working from head")
+         var count = 0;
+         var current = this.head;
+         while(count != index){
+             current = current.next;
+             count++;
+         }}
+         else{
+             console.log("Working FROM TAIL")
+             var count = this.length - 1;
+             var current = this.tail;
+             while(count != index){
+                 current = current.prev;
+                 count--;
+             }
+         }
+         return current;
+     }
+     set(index,value){
+         var targetNode = this.get(index);
+         if(targetNode !== null){
+             targetNode.value = value;
+             return true
+         }
+         return false;
+     }
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+insert
+------
+Adding a node in doubly linked list by certain position.
+
+Insert pseudocode
+------------------
+1.If index is less than zero or greater than or equal to length return false
+2.If index is 0,unshift
+3.If index is same as length,push
+4.Use get method to access index-1
+5.set next and prev properties on correct nodes to link everything together
+6.increment length
+7.return true
+
+class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+     }
+     get(index){
+         if(index < 0 || index >= this.length  ){
+             return null
+         }
+         if(index <= this.length/2){
+             console.log("Working from head")
+         var count = 0;
+         var current = this.head;
+         while(count != index){
+             current = current.next;
+             count++;
+         }}
+         else{
+             console.log("Working FROM TAIL")
+             var count = this.length - 1;
+             var current = this.tail;
+             while(count != index){
+                 current = current.prev;
+                 count--;
+             }
+         }
+         return current;
+     }
+     set(index,value){
+         var targetNode = this.get(index);
+         if(targetNode !== null){
+             targetNode.value = value;
+             return true
+         }
+         return false;
+     }
+     insert(index,value){
+         if(index < 0 || index > this.length ) return false;
+         if(index === 0) return !!this.unshift(value);
+         if(index === this.length) return !!this.push(value);
+
+             var beforeNode = this.get(index - 1);
+             var afterNode = beforeNode.next;
+             var newNode = new Node(value);
+             beforeNode.next = newNode , newNode.prev = beforeNode;
+             newNode.next = afterNode, afterNode.prev = newNode;
+             this.length++;
+             return true;
+     }
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+Remove
+-------
+Removing a node in doubly linked list
+
+Pseudocode Remove
+-----------------
+1.If index is less than zero or greater than or equal to length return undefined
+2.if index is zero,shift
+3.if index is same as length - 1,pop
+4.Use get method to retrive item to be removed.
+5.Update next and prev properties to remove found node from list.
+6.set next and prev to null on found node.
+7.decrement length
+8.return removed node
+
+     remove(index){
+         if(index < 0 || index >= this.length) return undefined;
+         if(index === 0) return this.shift()
+         if(index === this.length - 1) return this.pop()
+         var beforeNode = this.get(index - 1);
+         var afterNode = this.get(index + 1);
+         beforeNode.next = afterNode;
+         afterNode.prev = beforeNode;
+         this.length --;
+         return list; 
+     }                                                  //MY APPROACH WHERE I DON'T RETURN REMOVED ITEM BUT RETURN WHOLE LIST
+     
+  Another approach
+  -----------------
+  class Node{
+    constructor(value){
+        this.value = value;
+        this.next = null;
+        this.prev = null;
+    }
+}
+
+class doublyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }
+        else{
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            this.tail = newNode
+        }
+        this.length++;
+        return this;
+    }
+    pop(){
+        if(!this.head) return undefined;
+        var poppedNode = this.tail;
+        if(this.length === 1){
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+            this.tail = poppedNode.prev;
+            this.tail.next = null;
+            poppedNode.prev = null;
+        }
+        this.length--;
+        return poppedNode;
+    }
+    shift(){
+        if(!this.head) return undefined;
+        var oldHead = this.head;
+        if(this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        }
+        else{
+        this.head = oldHead.next ;
+        this.head.prev = null;
+        oldHead.next = null;
+        }
+        this.length--;
+        return oldHead;
+    }
+
+    unshift(value){
+        var newNode = new Node(value);
+        if(this.length === 0){
+            this.head = newNode;
+            this.tail = newNode;
+        }else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+     }
+     get(index){
+         if(index < 0 || index >= this.length  ){
+             return null
+         }
+         if(index <= this.length/2){
+             console.log("Working from head")
+         var count = 0;
+         var current = this.head;
+         while(count != index){
+             current = current.next;
+             count++;
+         }}
+         else{
+             console.log("Working FROM TAIL")
+             var count = this.length - 1;
+             var current = this.tail;
+             while(count != index){
+                 current = current.prev;
+                 count--;
+             }
+         }
+         return current;
+     }
+     set(index,value){
+         var targetNode = this.get(index);
+         if(targetNode !== null){
+             targetNode.value = value;
+             return true
+         }
+         return false;
+     }
+     insert(index,value){
+         if(index < 0 || index > this.length ) return false;
+         if(index === 0) return !!this.unshift(value);
+         if(index === this.length) return !!this.push(value);
+
+             var beforeNode = this.get(index - 1);
+             var afterNode = beforeNode.next;
+             var newNode = new Node(value);
+             beforeNode.next = newNode , newNode.prev = beforeNode;
+             newNode.next = afterNode, afterNode.prev = newNode;
+             this.length++;
+             return true;
+     }
+     remove(index){
+         if(index < 0 || index >= this.length) return undefined;
+         if(index === 0) return this.shift()
+         if(index === this.length - 1) return this.pop()
+         var removedNode = this.get(index);
+         removedNode.prev.next = removedNode.next;
+         removedNode.next = removedNode.prev;
+         removedNode.next = null;
+         removedNode.prev = null;
+         this.length --;
+         return removedNode; 
+     }
+}
+
+var list = new doublyLinkedList();
+list.push(100)
+list.push(200)
+list.push(300)
+
+
