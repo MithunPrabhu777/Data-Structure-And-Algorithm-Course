@@ -3985,4 +3985,69 @@ list.push(100)
 list.push(200)
 list.push(300)
 
+Day - 33
+---------
 
+Big O of Doubly Linked Lists
+-----------------------------
+Insertion - O(1)
+Removal - O(1)
+Searching - O(N)
+Access - O(N)
+
+Technically saerching is O(N/2),but that's still O(N)
+
+RECAP
+-----
+1.Doubly Linked Lists are almost identical to singly linked lists except there is additional pointer to previous nodes
+2.Better than singly linked lists for finding nodes and can be done in half the time!!
+3.However,they do take up more memory considering extra pointer.
+
+STACKS
+------
+Objectives
+----------
+1.Define what stack is
+2.Understand use cases for stack
+3.Implement operations on stack data structure
+
+What is a stack???
+------------------
+ A LIFO data structure
+ 
+The last element added to stack will be first element removed from stack.
+
+How is it used???
+Think is about a stack of plates,or a stack of markers, or stack of anything.
+As you pile up last thing is what gets removed first.
+
+Where stacks are used
+----------------------
+1. Managing function invocations
+2. Undo/Redo
+3. Routing(the history object) is treated as a stack!!!
+
+There is more than one way of implementing a stack.   //shift,unshift    push,pop       shift,unshift is inefficient because index should be reindexed every time.
+
+1.ARRAY IMPLEMENTATION
+---------------------
+2.LINKED LIST IMPLEMENTATION
+---------------------------
+
+A STACK CLASS
+-------------
+
+class Stack{
+constructor(){
+this.first = null;
+this.last = null;
+this.size = 0;
+}
+}
+
+class Node{
+constructor(){
+this.value = value;
+this.next = null;
+}
+}
