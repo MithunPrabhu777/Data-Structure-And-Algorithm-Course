@@ -4051,3 +4051,155 @@ this.value = value;
 this.next = null;
 }
 }
+
+Day - 34
+--------
+Pushing Pseudocode
+-------------------
+1.Function should accept value
+2.Create a new node with that value
+3.If there are no nodes in stack,set first and last property to be newly created node.
+4.If there is at least one node,create a variable that stores current first property on stack.
+5.Reset first property to be newly created node 
+6.set next property on node to be previously created variable
+7.Increment size of stack by 1
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class Stack{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+    push(value){
+        var newNode = new Node(value);
+        if(!this.first){
+            this.first = newNode;
+            this.last = newNode;
+        }
+        else{
+            var temp = this.first;
+            this.first = newNode;
+            this.first.next = temp;
+        }
+        return ++this.size;
+    }
+}
+
+pop pseudoocde
+--------------
+1.If there are no nodes in stack,return null
+2.If there is one noe in stack,set first and last to null
+3.create a temporary variable to store first property on satck
+4.If there is more than one node,set first property to be next property on current first.
+5.Decrement size by 1
+6.Return value of node removed.
+
+class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+class Stack{
+    constructor(){
+        this.first = null;
+        this.last = null;
+        this.size = 0;
+    }
+    push(value){
+        var newNode = new Node(value);
+        if(!this.first){
+            this.first = newNode;
+            this.last = newNode;
+        }
+        else{
+            var temp = this.first;
+            this.first = newNode;
+            this.first.next = temp;
+        }
+        return ++this.size;
+    }
+    pop(){
+        if(!this.first) return null;
+        var temp = this.first;
+        if(this.first === this.last){
+            this.last = null;
+        }
+        this.first = this.first.next;
+        this.size--;
+        return temp.value;
+    }
+}
+
+Big O of stacks
+---------------
+Insertion - O(1)
+Removal - O(1)
+Searching - O(N)
+Access - O(N)
+
+Stacks are not built in data structure in javascript,but are relatively simple to implement
+stacks are used to handle function invocations for operations like undo/redo and for routing.
+
+Queues
+------
+Objectives
+----------
+Define what queue is
+Understand use cases for queue
+Implement operations on queue data structure
+
+What is queue??
+---------------
+
+A FIFO data structure.
+
+Thinkabout last time you waited in line....
+
+How do e use them inprogramming???
+Waiting join the game
+1.background tasks
+2.uploading resources
+3.priting/task processing
+
+Building A Queue with array
+---------------------------
+
+push with shift or pop with unshift
+
+A Queue Class
+-------------
+class Queue{
+constructor(){
+this.first = null;
+this.last = null;
+this.size - 0;
+}
+}
+
+class Node{
+constructor(value){
+this.value = value;
+this.next = null;
+}
+}
+
+Enqueue Pseudocode
+------------------
+1.This function accepts some value
+2.Create new node using that value passed to function
+3.If there are no nodes in queue,set this node to be first and last property of queue.
+4.Otherwise,set next property on current last to that node,a dn then set last property of queue to be that node.
+5.Increment length
+6.return list
+
+
+
