@@ -4201,5 +4201,178 @@ Enqueue Pseudocode
 5.Increment length
 6.return list
 
+class Node{
+constructor(value){
+this.value = value;
+this.next = null;
+}
+}
+
+Day - 35
+---------
+
+class Queue{
+constructor(){
+this.first = null;
+this.last = null;
+this.size = 0;
+}
+
+enqueue(value){
+    var newNode = new Node(value);
+    if(!this.first) {
+        this.first = newNode;
+        this.last = newNode;
+    }else{
+        this.last.next = newNode;
+        this.last = newNode;
+    }
+    return ++this.size;
+}
+
+}
+
+var queue = new Queue();
+queue.enqueue(400);
+
+Dequeue Pseudocode
+-------------------
+1.If there is no first property,just return null
+2.store the first property in a variable
+3.see if first is same as last (if there is only one node) if so, set first and last to be null
+4.If there more than 1 node,set first property to be next property of first
+5.Decrement size by 1
+6.Return value of node dequeued.
+
+class Node{
+constructor(value){
+this.value = value;
+this.next = null;
+}
+}
+
+class Queue{
+constructor(){
+this.first = null;
+this.last = null;
+this.size = 0;
+}
+
+enqueue(value){
+    var newNode = new Node(value);
+    if(!this.first) {
+        this.first = newNode;
+        this.last = newNode;
+    }else{
+        this.last.next = newNode;
+        this.last = newNode;
+    }
+    return ++this.size;
+}
+
+dequeue(){
+    if(!this.first) return null;
+    var temp = this.first;
+    if(this.first === this.last){
+        this.last = null;
+    }
+    this.first = this.first.next;
+    this.size--;
+    return temp.value
+}
+}
+
+var queue = new Queue();
+queue.enqueue(400);
+
+Big O of Queues
+---------------
+Insertion - O(1)
+Removal - O(1)
+searching - O(N)
+Access - O(N)
+
+1.Queues are useful for processing tasks and are foundational for more complex data structures.
+2.Insertion and Removal can be done in O(1)
+
+---------------------------------------------------------------------------------------------------------
+
+TREES
+-----
+1.Define what a tree is
+2.Compare and contrast trees and lists
+3.Explain difference between trees,binary trees, and binary search trees.
+4.Implement operations on binary search trees.
+
+What is a tree???
+A data structure that consists of nodes in a parent/child relationship.
+
+Lists - Linear
+Trees - nonlinear
+
+TREE TERMINOLOGY
+----------------
+1.Root-top node in tree
+2.child - node directly connected to another node when moving away from root
+3.parent - converse notion of child
+4.siblings - group of nodes with same parent
+5.Leaf - node with no children
+6.edge - connection between one node and another.
+
+TREES are used in lots of diffrent applications!!!
+1.HTML DOM
+2.Network Routing
+3.Abstarct Syntax tree
+4.Artificial Intelligence
+5.Folders in Operating System.
+6.6.Computer file systems
+7.json
+
+Kinds Of Trees
+--------------
+
+1.Trees
+2.Binary Tree
+3.Binary Search Tree
+
+HOW BSTS WORK
+--------------
+1.Every parent node has at most two children
+2.Every node to left of parent node is always less than parent
+3.every node to right of parent node is always greater thqan parent.
+
+The Binry searchTree Class
+---------------------------
+
+class BinarySearchTree{
+constuctor(){
+this.root = null;
+}
+}
+
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+INSERTING A NODE
+----------------
+steps - iteratively or Recursively
+
+1.Create a new node
+2.Starting at the root
+	1.check if there is root,if not - root now becomes new Node!!
+	2.If there a root,check if value of new Node is greater than or less than value of root.
+	3.If it is greater,
+		1.Check to see if there is a node to the right
+			1.If there is,move to that node and repeat steps
+			2.if there is not,add node as right property.
+	4.If it is less,
+		1.check to see if there is a node to left
+		2.If there is,move tot hat node and repeat steps
+		3.If there is not,add node as left property.
 
 
