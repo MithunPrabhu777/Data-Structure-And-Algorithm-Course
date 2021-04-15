@@ -4375,4 +4375,265 @@ steps - iteratively or Recursively
 		2.If there is,move tot hat node and repeat steps
 		3.If there is not,add node as left property.
 
+Day - 36
+--------
 
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+class BinarySearchTree{
+constructor(){
+this.root = null;
+}
+
+insert(value){
+    var newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    }else{
+        var current = this.root;
+        while(true){
+        if(value < current.value){
+              if(current.left === null){
+                  current.left = newNode;
+                  return this;
+              }else{
+                  current = current.left;
+              }     
+              }
+         else if(value > current.value){
+             if(current.right === null){
+                 current.right = newNode;
+                 return this;
+             }else{
+                 current = current.right;
+             }
+         }
+          }
+        }
+ 
+    }
+}
+
+
+var tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(5);
+tree.insert(13);
+tree.insert(11);
+tree.insert(2);
+tree.insert(16);
+tree.insert(18);
+                                                                             
+//         10
+//      5      13
+//   2    7  11   16
+
+to handle duplicates
+--------------------
+
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+class BinarySearchTree{
+constructor(){
+this.root = null;
+}
+
+insert(value){
+    var newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    }else{
+        var current = this.root;
+        while(true){
+        if(value === current.value) return undefined;
+        if(value < current.value){
+              if(current.left === null){
+                  current.left = newNode;
+                  return this;
+              }else{
+                  current = current.left;
+              }     
+              }
+         else if(value > current.value){
+             if(current.right === null){
+                 current.right = newNode;
+                 return this;
+             }else{
+                 current = current.right;
+             }
+         }
+          }
+        }
+ 
+    }
+}
+
+
+var tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(5);
+tree.insert(13);
+tree.insert(11);
+tree.insert(2);
+tree.insert(16);
+tree.insert(18);
+tree.insert(5);                                                                   
+
+
+//         10
+//      5      13
+//   2    7  11   16
+
+Finding a Node in a BST
+------------------------
+
+steps - iteratively or recursively
+
+
+1.Starting at the root
+	1.check if there is root,if not - we re done
+	2.If there a root,check if value of new Node is greater than or less than value of root.
+	3.If it is greater,
+		1.Check to see if there is a node to the right
+			1.If there is,move to that node and repeat steps
+			2.if there is not,we are done
+	4.If it is less,
+		1.check to see if there is a node to left
+		2.If there is,move tot hat node and repeat steps
+		3.If there is not,we are done
+
+
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+class BinarySearchTree{
+constructor(){
+this.root = null;
+}
+
+insert(value){
+    var newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    }else{
+        var current = this.root;
+        while(true){
+        if(value === current.value) return undefined;
+        if(value < current.value){
+              if(current.left === null){
+                  current.left = newNode;
+                  return this;
+              }else{
+                  current = current.left;
+              }     
+              }
+         else if(value > current.value){
+             if(current.right === null){
+                 current.right = newNode;
+                 return this;
+             }else{
+                 current = current.right;
+             }
+         }
+          }
+        }
+ 
+    }
+
+    find(value){
+        if(this.root == null) return false;
+        var current = this.root,
+        found = false;
+        while(current && !found){
+            if(value < current.value){
+                 current = current.left;
+            }else if(value > current.value){
+                current = current.right;
+            }else{
+                found = true;
+                return current;
+            }
+        }
+        if(!found) return undefined;
+    }
+}
+
+//     contains(value){
+//         if(this.root == null) return false;
+//         var current = this.root,
+//         found = false;
+//         while(current && !found){
+//             if(value < current.value){
+//                  current = current.left;
+//             }else if(value > current.value){
+//                 current = current.right;
+//             }else{
+//                  return true;
+//             }
+//         }
+//          return false;
+//     }
+// }
+
+var tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(5);
+tree.insert(13);
+tree.insert(11);
+tree.insert(2);
+tree.insert(16);
+tree.insert(18);
+tree.insert(5);                                                                   
+
+
+//         10
+//      5      13
+//   2    7  11   16
+
+
+Big O of BST
+------------
+Insertion - O(logn)
+Searching - O(logn)
+
+Not Guaranteed!!!
+
+
+Double Number of Nodes
+you only increase number of steps to insert/find by 1.
+
+2x number of nodes - 1 extra step
+4x number of nodes - 2 extra step
+8x number of nodes - 3 extra step
+
+TREE TRAVERSAL
+--------------
+Traversing A tree
+Two Ways: 1.Breadth First Search
+	  2.Depth First Search   -  InOrder
+	                            Preorder
+				    Postorder
+
+
+BREADTH FIRST SEARCH
+---------------------
