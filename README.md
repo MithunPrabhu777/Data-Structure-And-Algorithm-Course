@@ -4637,3 +4637,26 @@ Two Ways: 1.Breadth First Search
 
 BREADTH FIRST SEARCH
 ---------------------
+
+steps-iteratively
+
+1.create a queue that can be array and a variable to store value of nodes visited.
+2.Place root node in queue
+3.looop as long as there is anything in queue
+	1.Dequeue a node from queue and push value of node into variable that stores nodes
+	2.If there is left property on node dequeued - add it to queue
+	3.If there is a right property on node dequeued - add it to queue
+4.Return variable that stores values.
+
+DEPTH FIRST SEARCH
+-------------------
+
+DFS - PreOrder
+ [10,6,3,8,15,20]
+ 
+DFS -PreOrder
+-------------
+Steps - recursively
+1.Create a variable to store values of nodes visited.
+2.Store root of BST in variable called current.
+
