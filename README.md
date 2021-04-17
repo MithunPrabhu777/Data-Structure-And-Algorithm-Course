@@ -4654,9 +4654,170 @@ DEPTH FIRST SEARCH
 DFS - PreOrder
  [10,6,3,8,15,20]
  
+ 
+ class Node {
+    constructor(value){
+        this.value = value;
+        this.next = null;
+    }
+}
+
+// var first = new Node("Hi");
+// first.next = new Node("there");
+// first.next.next = new Node("How are you??");
+
+class SinglyLinkedList{
+    constructor(){
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+
+    push(value){
+        var newNode = new Node(value);
+        if(!this.head){
+        this.head = newNode;
+        this.tail = this.head;
+        }else{
+        this.tail.next = newNode;
+         this.tail = newNode;
+        }
+         this.length +=1;
+         return this;
+    }
+
+//     traverse(){
+//         var current = this.head;
+//         while(current){
+//             console.log(current.value);
+//             current = current.next;
+//         }
+//     }
+        pop(index){
+            if(!this.head) return undefined;
+            var current = this.head;
+            var newTail = current;
+            while(current.next){
+                newTail = current;
+                current = current.next;
+            }
+           this.tail = newTail;
+           this.tail.next = null;
+           this.length -=1;
+           if(this.length === 0){
+               this.head = null;
+               this.tail = null;
+           }
+           return current;
+        }
+    shift(){
+        if(!this.head) return undefined;
+        var currentHead = this.head;
+        this.head = currentHead.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return currentHead;
+    }
+    unshift(value){
+        var newNode = new Node(value);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = this.head;
+        }
+        else{      
+       newNode.next =  this.head;
+       this.head = newNode;
+       }
+       this.length++;
+       return this;
+    }
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        var counter = 0;
+        var current = this.head;
+        if(counter !== index){
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+    set(index,value){
+        var foundNode = this.get(index);
+        if(foundNode){
+            foundNode.value = value;
+            return true;
+        }
+        return false;
+    }
+    insert(index,value){
+        if(index < 0 || index > this.length) return false;
+        if(index === this.length) return !!this.push(value);
+        if(index === 0) return !!this.unshift(value);
+        var newNode = new Node(value);
+        var prev = this.get(index - 1);
+        var temp = prev.next;
+        prev.next = newNode;
+        newNode.next = temp; 
+        this.length++;
+        return true;
+    }
+    remove(index){
+        if(index < 0 || index >= this.length) return undefined;
+        if(index === 0) return this.shift();
+        if(index === this.length - 1) return this.pop();
+        var previousNode = this.get(index - 1);
+        var removed = previousNode.next;
+        previousNode.next = removed.next;
+        this.length--;
+        return removed;
+    }
+    reverse(){
+        var node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        var next;
+        var prev = null;
+        for(var i=0;i<this.length;i++){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
+    }
+    print(){
+        var arr = [];
+        var current = this.head;
+        while(current){
+            arr.push(current.value)
+            current = current.next
+        }
+        console.log(arr);
+    }
+}
+
+
+
+var list = new SinglyLinkedList();
+list.push(25);
+list.push(35);
+list.push(45);
+list.push(55);
+list.push(65);
+
 DFS -PreOrder
 -------------
 Steps - recursively
 1.Create a variable to store values of nodes visited.
 2.Store root of BST in variable called current.
+3.Write helper function which accepts a node
+  1.Push the value of node ton the variable that stores values
+  2.If node has left property,call helper function with left property on the node
+  3.If the node has right property, call he helper function with the right property on the node.
+4.Invoke helper function with the current variable
+5.Return array of values
+
+
 
