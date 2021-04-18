@@ -4807,6 +4807,9 @@ list.push(45);
 list.push(55);
 list.push(65);
 
+Day - 37 & Day - 38
+-------------------
+
 DFS -PreOrder
 -------------
 Steps - recursively
@@ -4885,8 +4888,298 @@ tree.insert(16);
 tree.DFSPreOrder();
 
 
+
 //         10
-//      5      13
-//   2    7  11   16
+//     7        11
+// 2
+//     5            13 
+                   
+//                      16
+
+Day - 39
+--------
+
+DFS - PostOrder
+----------------
+steps-recursively
+
+1.Create a variable to store values of nodes visited.
+2.Store root of BST in variable called current.
+3.Write helper function which accepts a node
+  1.If node has left property,call helper function with left property on the node
+  2.If the node has right property, call the helper function with the right property on the node.
+  3.Push the value of the node to the variable that stores the values.
+4.Invoke helper function with the current variable
+5.Return array of values.
+
+
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+class BinarySearchTree{
+constructor(){
+this.root = null;
+}
+
+insert(value){
+    var newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    }else{
+        var current = this.root;
+        while(true){
+        if(value < current.value){
+              if(current.left === null){
+                  current.left = newNode;
+                  return this;
+              }else{
+                  current = current.left;
+              }     
+              }
+         else if(value > current.value){
+             if(current.right === null){
+                 current.right = newNode;
+                 return this;
+             }else{
+                 current = current.right;
+             }
+         }
+          }
+        }
+ 
+    }
+    
+    DFSPreOrder(){
+        var data = [];
+        function traverse(node){
+            data.push(node.value);
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+        }
+        traverse(this.root);
+        return data;
+    }
+    
+        DFSPostOrder(){
+        var data = [];
+        function traverse(node){
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+	    data.push(node.value);
+        }
+        traverse(this.root);
+        return data;
+    }
+}
+
+
+var tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(11);                                                                           
+tree.insert(7);
+tree.insert(2);
+tree.insert(5);
+tree.insert(13);
+tree.insert(16);
+tree.DFSPreOrder();
+tree.DFSPostOrder();
+
+
+//         10
+//     7        11
+// 2
+//     5            13 
+                   
+//                      16
+
+DFS - InOrder
+-------------
+steps-recursively
+
+1.Create a variable to store values of nodes visited
+2.store root of BST in variable called current.
+3.Write helper function which accepts node
+	1.If node has left property,call helper function with left property on node.
+	2.Push value of node to variable that stores values
+	3.If node has right property,call helper function with right property on the node
+4.Invoke helper function with current variable
+5.Return data
+
+
+class Node{
+constructor(value){
+this.value = value;
+this.left = null;
+this.right = null;
+}
+}
+
+class BinarySearchTree{
+constructor(){
+this.root = null;
+}
+
+insert(value){
+    var newNode = new Node(value);
+    if(this.root === null) {
+        this.root = newNode;
+        return this;
+    }else{
+        var current = this.root;
+        while(true){
+        if(value < current.value){
+              if(current.left === null){
+                  current.left = newNode;
+                  return this;
+              }else{
+                  current = current.left;
+              }     
+              }
+         else if(value > current.value){
+             if(current.right === null){
+                 current.right = newNode;
+                 return this;
+             }else{
+                 current = current.right;
+             }
+         }
+          }
+        }
+ 
+    }
+    
+    DFSPreOrder(){
+        var data = [];
+        function traverse(node){
+            data.push(node.value);
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+        }
+        traverse(this.root);
+        return data;
+    }
+
+    DFSPostOrder(){
+        var data = [];
+        function traverse(node){
+            if(node.left) traverse(node.left)
+            if(node.right) traverse(node.right)
+            data.push(node.value);
+        }
+         traverse(this.root);
+         return data;
+    }
+    
+    DFSInOrder(){
+        var data = [];
+        function traverse(node){
+            if(node.left) traverse(node.left)
+            data.push(node)
+            if(node.right) traverse(node.right)
+        }
+    }
+}
+
+
+var tree = new BinarySearchTree();
+tree.insert(10);
+tree.insert(11);                                                                           
+tree.insert(7);
+tree.insert(2);
+tree.insert(5);
+tree.insert(13);
+tree.insert(16);
+tree.DFSPreOrder();
+tree.DFSPostOrder();
+tree.DFSInOder();
+
+//         10
+//     7        11
+// 2
+//     5            13 
+                   
+//                      16
+
+BFS or DFS is better???
+It depends but 
+
+DFS - Inorder is useful sorted items
+postorder for ordering items in large sets
+
+Binary Heaps:
+2 types:
+1.MaxBinaryHeap
+2.MinBinaryHeap
+
+Max Binary Heap will always have parent node i.e it's value greater than child nodes
+Min Binary Heap will always have child node i.r it's value greater than parent node.
+There is no hard and fast rules that each tier will have same level of values i.e siblings may have greater or less value compared to current node.
+
+Max Binary Heap
+---------------
+1.Each parent has at most 2 child nodes
+2.value of each parent node is always greater than its child nodes
+3.In max binary Heap prent is greater than children,but there are no guarantees between sibling nodes.
+4.A binary heap is compacta s possible.All children of each node are as full as they can be and left children are filled out first.
+
+Why do we need to know this??
+Binary Heaps are used to implement Priority Queues,which are very commonly used data structures.
+
+They are used quite a bit, graph traversal algorithms.
+
+Representing Heaps
+-------------------
+		41
+	39		33
+   18        27     12
+
+we can use binary serach trees too.but
+There is an easy way of storing Binary Heap a list/array!!!
+
+For any index of an array n...
+The left child is stored at 2n+1
+The right child is stored at 2n+2
+
+For any child node at index n...
+its parent is at index (n-1)/2
+			floored
+			
+MaxBinaryHeap Sort Class
+-------------------------
+
+Defining Our Class
+------------------
+
+class Name:
+	MaxBinaryHeap
+Properties:
+	values=[]
+
+Adding to a maxBinaryHeap
+--------------------------
+1.add to the end
+2.Bubble Up
+
+Insert Pseudocode
+------------------
+1.Push value into values property on the heap
+2.Bubble the value up to its correct spot!!!
+
+Insert Pseudocode Adamant
+--------------------------
+1.Push value into values property on heap
+2.Bubble Up:
+ 	1.Create a variable called index which is length of values property-1
+ 	2.create a variable called parentIndex which is the floor of (index - 1)/2
+ 	3.Keep looping as long as value element at parentIndex is less than values element at child index
+ 		1.swap value of values element at parentIndex with value of element proeprty at child index
+ 		2.set index to be parentIndex, and start over.
+ 		
 
 
