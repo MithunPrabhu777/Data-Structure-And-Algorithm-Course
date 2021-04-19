@@ -5181,5 +5181,58 @@ Insert Pseudocode Adamant
  		1.swap value of values element at parentIndex with value of element proeprty at child index
  		2.set index to be parentIndex, and start over.
  		
+Day - 40
+---------
+
+class MaxBinaryHeap{
+    constructor(){
+        this.values = [41,39,33,18,27,12];
+    }
+    
+    insert(element){
+        this.values.push(element);
+        this.bubbleUp();
+    }
+
+    
+    bubbleUp(){
+        let idx = this.values.length - 1;
+        const element = this.values[idx];
+        while(idx > 0){
+        let parentIdx = Math.floor((idx - 1) / 2);
+        let parent = this.values[parentIdx];
+        if(element <= parent) break;
+        this.values[parentIdx] = element;
+        this.values[idx] = parent;
+        idx = parentIdx;
+        }
+    }
+}
+
+let heap = new MaxBinaryHeap();
+heap.insert(55);
+
+Removing From A Heap
+---------------------
+1.Remove the root
+2.Replace with the most recently added
+3.Adjust(sink down)
+
+sink down
+---------
+The procedurte for deleting root from heap (effectively extracting maximum element in max-heap or minimum element in min-heap) and restoring properties is called down-heap(is also known as bubble-down,percolate-down,sift-down,trickle-down,heapify-down,cascade-down and extract-min/max).
+
+Removing(also called extractMax)
+---------------------------------
+1.swap first value in the values property with the last one
+2.pop from values property.so you can return value at the end
+3.Have new root "sink down" to correct spot!!!
+	1.your parent index starts at 0(root)
+	2.find index of left child 2*index + 1 (make sure its not out of bounds)
+	3.find index of right child: 2*index + 2(make sure its not out of bounds)
+	4.If left or right child is greater than element ... swap .If both left and right are larger,swap with largest child
+	5.keep looping and swapping until neither child is larger than element
+	6.return old root!!!
+	
 
 
