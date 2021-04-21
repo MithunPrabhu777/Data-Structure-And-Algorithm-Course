@@ -5235,4 +5235,203 @@ Removing(also called extractMax)
 	6.return old root!!!
 	
 
+Day -41 And Day - 42
+---------------------
+
+class MaxBinaryHeap{
+    contructor(){
+        this.values = [41,39,33,18,27,12];
+    }
+    
+    insert(element){
+        this.values.push(element);
+        this.bubbleUp();
+    }
+    
+    bubbleUp(){
+        let idx = this.values.length - 1;
+        const element = this.values[idx];
+        while(idx > 0){
+        let parentIdx = Math.floor((idx - 1) / 2);
+        let parent = this.values[parentIdx];
+        if(element <= parent) break;
+        this.values[parentIdx] = element;
+        this.values[idx] = parent;
+        idx = parentIdx;
+        }
+    }
+    
+//     extractmax(){
+//       //EDGE CASE COME BACK TO THIS!!!
+//       const max = this.values[0];
+//       const end = this.values.pop();
+//       this.values[0] = end;
+// //    tricle down
+//       this.sinkDown();
+//       return max;
+//     }
+    
+//     sinkDown(){
+//       let idx = 0;
+//       const length = this.values.length;
+//       const element = this.values[0];
+//       while(true){
+//           let leftChildIdx = 2 * idx + 1;
+//           let rightChildIdx = 2 * idx + 2;
+//           let leftChild,rightChild;
+//           let swap = null;
+    
+//           if(leftChildIdx < length){
+//              leftChild = this.values[leftChildIdx];
+//              if(leftChild > element){
+//                swap = leftChildIdx;
+//              }
+//           }
+          
+//           if(rightChildIdx < length){
+//             rightChild = this.values[rightChildIdx];
+//             if(
+//             (swap === null && rightChildIdx > element) || 
+//             (swap !==null && rightChild > leftChild)){
+//                  swap = rightChildIdx
+//             }
+//           }
+//           if(swap === null) break;
+//           this.values[idx] = this.values[swap];
+//           this.values[swap] = element;
+//           idx = swap;
+//       }
+//     }
+ }
+
+//  0   1   2    3    4    5    6
+//  [55,39,41,18,27,12,33]
+
+let heap = new MaxBinaryHeap();
+// heap.insert(41);
+// heap.insert(39);
+// heap.insert(33);
+// heap.insert(18);
+// heap.insert(27);
+// heap.insert(12);
+heap.insert(55);
+
+Building A Priority Queue
+--------------------------
+what is priority queue??
+A data structure where each element has a priority. Elements with higher priorities are served before elements with lower priorities.
+
+Unix machines --- No. of process behind the scene ---- have process-id and have priority level 20 most and 0 is least i.e 0 is highest priority in compared to other processes.
+
+A naive version
+---------------
+use list to store all elements
+
+priority: 3  priority:1  priority: 2 priority: 5  priority:4
+
+iterate over the entire thing to find highest priority element.
+
+		exploded head
+	concussion            drunk
+low fever     Headache     flu
+
+The same as before
+
+class PriorityQueue:
+	PriorityQueue
+Properties:
+	values = []
+	
+But Also...
+
+ClassName: 
+	Node
+Properties:
+	value
+	priority
+value doesn't matter. Heap is contructed using Priority.
+
+Our Priority Queue
+-------------------
+1.Write a Min Binary Heap - lower number means higher priiority
+2.Each node has a value and a priority.Use the priority to build the heap.
+3.Enqueue method accepts a value and priority. makes a new node and puts it in the right spot based off its priority.
+4.Dequeue method removes root element,returns it and rearranges heap using priority.
+
+class PriorityQueue{
+  constructor(){
+    this.values = [];
+  }
+
+  enqueue(val,priority){
+    let newNode = new Node(val,priority);
+    this.values.push(newNode);
+    this.bubbleUp();
+  }
+
+  bubbleUp(){
+    let idx = this.values.length - 1;
+    let element = this.values[idx];
+    while(idx > 0){
+      let parentIdx = Math.floor((idx - 1)/2);
+      let parent = this.values[parentIdx];
+      if(element.priority <= parent.priority) break;
+      this.values[parentIdx] = element;
+      this.values[idx] = parent;
+      idx = parentIdx;
+    }
+  }
+
+  dequeue(){
+     const max = this.values[0];
+     const end = this.values.pop();
+     if(this.values.length > 0){
+         this.values[0] = end;
+         this.sinkDown();
+     }
+  }
+
+  sinkDown(){
+      let idx = 0;
+      let element = this.values[0];
+      let length = this.values.length;
+      while(true){
+          let leftChildIdx = Math.floor((2 * idx) + 1);
+          let rightChildIdx = Math.floor((2 * idx) + 2);
+          let leftChild,rightChild;
+          let swap = null;
+
+          if(leftChildIdx < length){
+              leftChild = this.values[leftChildIdx];
+              if(leftChild.priority > element.priority){
+                  swap = leftChildIdx;
+              }
+          }
+
+          if(rightChildIdx < length){         
+            rightChild = this.values[rightChildIdx];
+           if((swap === null && rightChild.priority > element.priority) || (!swap == null && rightChild.priority > leftChild.priority)){
+               swap = rightChildIdx;
+               }
+           }
+           if(swap === null) break;
+           this.values[idx] = this.values[swap];
+           this.values[swap] = element;
+           idx = swap;
+      }
+  }
+}
+
+class Node {
+    contructor(val,priority){
+        this.val = val;
+        this.priority = priority;
+    }
+}
+
+var ER = new PriorityQueue();
+ER.enqueue("common cold", 1);
+ER.enqueue("gunshot wound", 5);
+ER.enqueue("High Fever", 2);
+
 
