@@ -5491,5 +5491,28 @@ How would we implement our own version???
 
 Hash Tables
 -----------
+Introductory Example
 
+Imagine we want to store some colors We could just use an array/list
+
+["#ff69b4","#ff4500","#00ffff]
+
+Not super readable!!. what do these colors correspond to???
+
+It would be nice if instead of using indices to access colors,we could use more human-readable keys.
+
+pink ---->  #ff69b4
+orangered ----->  #ff4500
+cyan ---> #00ffff
+
+colors["cyan"] is way better than colors[2]
+
+How can we get human-readability and computer readability???
+
+Computers don't know how to find an element at index pink!!!
+
+THE HASH PART
+-------------
+
+To implement a hash table,we'll be suing an array.
 
