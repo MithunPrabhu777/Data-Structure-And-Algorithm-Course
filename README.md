@@ -5513,6 +5513,147 @@ Computers don't know how to find an element at index pink!!!
 
 THE HASH PART
 -------------
+1.To impelement a hash table, we'll be using an array.
+2.In order to look up values by key,we need a way to convert keys into valid array indices.
+3.A function that performs this task is called a hash functon.
 
-To implement a hash table,we'll be suing an array.
+What Makes a Good Hash???
+1.Fast(i.e constant time)
+2.Doesn't cluster outputs at specific indices,but distributes uniformly.
+3.Deterministic(same input yields same output)
+
+function slowHash(key){
+for(var i=0;i<1000;i++){
+console.log("Everyday i'm hashing");
+}
+return key[0].charCodeAt(0);
+}
+
+What Makes for a Good Hash???
+-----------------------------
+
+Uniformly Distributes Values
+
+function sameHashedValue(key){
+return 0;
+}
+
+Above one always returns 0 !!! LOL
+Math.random() should not be used.
+
+// var code = "z".charCodeAt() - 96;
+// console.log(code);
+
+// let total = 0;
+// total += "hello".charCodeAt(0) - 96;
+// total += "hello".charCodeAt(1) - 96;
+// total += "hello".charCodeAt(2) - 96;
+// total += "hello".charCodeAt(3) - 96;
+// total += "hello".charCodeAt(4) - 96;
+// console.log(total);
+
+
+function hash(key,arrayLen){
+    let total = 0;
+    for (let char of key){
+        let value = char.charCodeAt(0) - 96;
+        total = (total + value) % arrayLen;
+    }
+    return total;
+}
+
+let key = "blue";
+console.log(hash(key,10));
+
+Refining Our Hash
+------------------
+1.Only hashes strings(we won't worry about this)
+2.Not constant time - linear in key length
+3.Could be a little more random  // use prime numbers.
+
+Hashing Revisited
+-----------------
+
+function hash(key,arrayLen){
+    let total = 0;
+    let WEIRD_PRIME = 31;
+    for(let i=0; i<Math.min(key.length, 100);i++){
+      let char = key[i];
+      let value = char.charCodeAt(0) - 96;
+      total = (total * WEIRD_PRIME + value) % arrayLen;
+    }
+    return total;
+  }
+
+
+var key = "lambo";
+console.log(hash(key,10));
+
+
+PrimeNumbers??? Wut
+
+Prime Numbers in hash is helpful in spreading out keys more uniformly.
+It is also helpful if array that you're putting values into has a prime length.
+You don't need to know why.(Math is complicated!!) But here are some links if you're curious.
+
+Why do hash functions use prime numbers???
+
+Does making array size a primee number help in hash table implementation???
+
+Dealing With Collisions
+-----------------------
+Even with a large array and a great hash function,collision are inevitable
+
+There are many strategies for dealing with collisions,but we'll focus on two:
+
+1.seperate chaining
+2.linear probing
+
+Sepeate chaining
+----------------
+With seperate chaining,at eah index in our array we store values using a more sophisticated data structure(e.g array or linked list).
+
+This allows us to store multiple key-value pairs at the same index.
+
+Seperate chaining
+-----------------
+if   darkblue ----> 4
+and  salmon   ----> 4 
+
+nest both keys in one block
+
+[["darkblue","#00008b"],["salmon","#fa8072"]]
+
+Linear Probing
+--------------
+With linear probing, when we find a collision,we search through array to find next empty slot.
+Unlike with seperaye chaining,this allows us to store a single key-value at each index.
+
+darkblue ---->  4
+salmon  ----->  4
+tomato  ----->  4
+
+find a empty space to store something.
+
+A hashTable Class
+-----------------
+
+class HashTable{
+    constructor(size=53){
+      this.keyMap = new Array(size);
+    }
+  
+    _hash(key){
+      let total = 0;
+      let WEIRD_PRIME = 31;
+      for(let i=0; i < Math.min(key.length, 100); i++){
+        let char = key[i];
+        let value = char.charCodeAt(0) - 96;
+        total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+      }
+      return total;
+    }
+  }
+ 
+
 
