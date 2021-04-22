@@ -5434,4 +5434,62 @@ ER.enqueue("common cold", 1);
 ER.enqueue("gunshot wound", 5);
 ER.enqueue("High Fever", 2);
 
+Day - 43
+--------
+
+Big O Binary Heaps
+------------------
+
+Insertion - O(log N)
+Removal - O(log N)
+Search - O(N)
+
+For 16 elements.....4 comparisions.
+
+What About Worst Case??
+
+depressing tree??
+
+but binary heaps will insert new elements to the left so worst case is similar that is O(log n)
+
+searching need to be compared with every element in heap so searching time complexity O(N).
+
+RECAP
+-----
+1.Binary Heaps are very useful data structures for sorting, and implementing other data structures like priority queues.
+2.Binary Heaps are either MaxBinaryHeaps or MinBinaryHeaps with parents either being smaller or larger than their children.
+3.With just a little bit of math, we can represent heaps using arrays!!!
+
+HASH TABLES
+-----------
+Objectives
+----------
+1.Explain what hash table is
+2.Define what hashing algorithm
+3.Discuss what makes a good hashing algorithm.
+4.Understand how collisions occur in a hash table.
+5.Handle collisions using seperate chaining or linear probing.
+
+What is a hash table?
+
+Hash tables are used to store key-value pairs.
+They are like arrays,but the keys are not ordered.
+Unlike arrays,hash tables are fast for all of following operations: finding values,adding new values and removing values!!!
+
+Why should I care??
+Nearly every programming language has some sort of hash table data structure.
+Because of their speed, hash tables are very commonly used!!!
+
+HASH TABLES IN THE WILD
+-----------------------
+Python has Dictionaries
+JS has Objects and Maps*  // Objects have some restrictions,but are basically hash tables.
+Java,Go and Scala have Maps 
+Ruby has... Hashes.
+
+How would we implement our own version???
+
+Hash Tables
+-----------
+
 
