@@ -5825,5 +5825,196 @@ class HashTable{
   GRAPHS
   ------
   
-  
+  Objectives
+------------
+1.Explain what is graph
+2.compare and contrast diffreent types of graphs and their use cases in real world
+3.Implement graph using adjacency list
+4.traverse through graph using BFS and DFS
+5.Compare and contrast graph traversal algorithms
+
+Graphs is NOdes + Connections
+
+Uses for Graphs
+---------------
+1.Social Networks
+2.Location/mapping
+3.Routing Algorithms
+4.Visual Hierarchy
+5.File System Optimization
+6.Everywhere
+
+Recommandations
+---------------
+1.People also watched
+2.You might also like...
+3.People you might know
+4.Frequently bought with
+
+Types of Graphs
+---------------
+Essential Graph terms
+---------------------
+1.vertex -  a node
+2.Edge - Connection between nodes
+3.Weighted/Unweighted - values assigned to disrtances between vertices
+4.Directed/Undirected - directions assigned to distanced between vertices.
+
+Representing A Graph
+--------------------
+1.Adjacency Matrix
+2.Adjacency List
+
+1.    A B C D E F
+ A    0 1 0 1 0 0
+ B    0 0 0 0 0 1
+ C    
+ D
+ E
+ F
+ 
+ Not useful for sparse matrix
+ 
+ Adjacency List
+ ---------------
+ [
+0	 [1,5],
+1	 [0,2],
+2	 [1,3],
+3	 [2,4],
+4	 [3,5],
+5	 [4,0]
+ ]
+
+Better than this is hash mapping
+---------------------------------
+
+{
+A:["B","F"],
+B:["A","C"],
+C:["B","D"],
+D:["C","E"],
+E:["D","F"],
+F:["E","A"]
+}
+
+Differences & Big O
+-------------------
+|V| - Number of vertices
+|E| - Number pf Edges
+
+Storage - 1.  O(|V| + |E|) - Adjacency list
+	  2.  O(|V^2|) - Adjacency Matrix
+
+Adjacency List            vs                    Adjacency Matrix
+--------------                                 ------------------
+1.Can take up less space(in sparse graphs)     1.Takes up more space(in sparse graphs)
+2.Faster to iterate over all edges             2. Slower to iterate over all edges
+3.can be slower to lookup specific edge        3. Faster to lookup specific edge
+
+What will we use?? Adjacency List  
+Most data in the real-world tends to lend itself to sparser and/or larger graphs
+
+Our Graph Class
+---------------
+
+class Graph{
+constructor(){
+  this.adjacencyList = {}
+}
+}
+
+WE ARE BUILDING AN UNDIRECTED GRAPH
+-----------------------------------
+
+Adding a vertex
+---------------
+
+1.Write a method called addVertex,which accepts a name of a vertex
+2.It should add a key to adjacency list with the name of the vertex and set its value to be an empty array
+
+g.addVertex("Tokyo")
+
+{
+"Tokyo":[]
+}
+
+Adding An Edge
+--------------
+1.This function should accept two vertices,we can call them vertex1 and vertex2
+2.The function should find in the adjacency list key of vertex1 and push vertex2 to the array
+3.The function should find the adjacency list the key opf vertex2 and push vertex1 tot he array
+4.Don't worry about handling errors/invalid vertices
+
+Removing An Edge
+----------------
+1.This function should accept two vertices,we'll call them vertex1 and vertex2
+2.The function should reassign the key of vertex1 to be an array should reassign the key of vertex2
+3.The function should reassign the key of vertex2 to be an arrray that does not contain vertex1
+4.Don;t worry about handling errors/invalid vertices
+
+Removing A Vertex
+-----------------
+
+1.Function should accept a vertex to remove
+2.Function should loop as long as there are any other vertices in the adjacency list for that vertex
+3.Inside of the loop,call our removeEdge function with vertex we are removing and any values in the adjacency list for that vertex.
+4.Delete the  key in the adjacency list for that vertex
+
+
+class Graph{
+    constructor(){
+        this.adjaccencyList = {};
+    }
+
+    addVertex(vertex){
+        if(!this.adjaccencyList[vertex]){
+            this.adjaccencyList[vertex] = [];
+        }
+    }
+
+    addEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1].push(vertex2);
+        this.adjaccencyList[vertex2].push(vertex1);
+    }
+
+    removeEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1] = this.adjaccencyList[vertex1].filter( v => v !== vertex2);
+        this.adjaccencyList[vertex2] = this.adjaccencyList[vertex2].filter( v => v !== vertex1);
+    }
+
+    removeVertex(vertex){
+        while(this.adjaccencyList[vertex].length) {
+            const adjacentVertex = this.adjaccencyList[vertex].pop();
+            this.removeEdge(vertex,adjacentVertex);
+        } 
+        delete this.adjaccencyList[vertex];
+    }
+}
+
+var graph = new Graph();
+graph.addVertex("Tokyo");
+graph.addVertex("Tokyo");
+graph.addVertex("Bengaluru");
+
+
+GRAPH TRAVERSAL
+----------------
+
+Visiting/Updating/Checking Each vertex in a graph
+
+Graph Traversal Uses
+---------------------
+1.Peer to peer networking
+2.Web crawlers
+3.Finding "closest" matches/recommendations
+4.Shortest path problems
+   1.GPS NAvigation
+   2.Solving mazes
+   3.AI(shortest path to win the game)
+
+
+
+
+
 
