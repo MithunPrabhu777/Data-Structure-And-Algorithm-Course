@@ -5571,6 +5571,10 @@ Refining Our Hash
 2.Not constant time - linear in key length
 3.Could be a little more random  // use prime numbers.
 
+
+Day - 44
+--------
+
 Hashing Revisited
 -----------------
 
@@ -5710,6 +5714,116 @@ var ht = new HashTable();
 ht.set("maroon", "#800000");
 ht.set("yellow","#ffff00");
 
+Day -45
+--------
 
+Keys/Values
+-----------
+Key
+---
+Loop through ash table array and returns array of keys in table
 
+values
+------
+Loop through hash table array and returns array of values in table.
+
+class HashTable{
+    constructor(size = 53){
+      this.keyMap = new Array(size);
+    }
+  
+    _hash(key){
+      let total = 0;
+      let WEIRD_PRIME = 31;
+      for(let i=0; i < Math.min(key.length, 100); i++){
+        let char = key[i];
+        let value = char.charCodeAt(0) - 96;
+        total = (total * WEIRD_PRIME + value) % this.keyMap.length;
+      }
+      return total;
+    }
+  
+    set(key,value){
+      let index = this._hash(key);
+      if(!this.keyMap[index]){
+        this.keyMap[index] = [];
+      }
+      this.keyMap[index].push([key,value]);
+    }
+  
+    get(key){
+      let index = this._hash(key);
+      if(this.keyMap[index]){
+        for(let i=0;i< this.keyMap[index].length; i++){
+          if(this.keyMap[index][i][0] === key){
+            return this.keyMap[index][i]
+          }
+        }
+      }
+      return undefined;
+    }
+
+    values(){
+      let valuesArr = [];
+      for(let i=0;i<this.keyMap.length;i++){
+        if(this.keyMap[i]){
+          for(let j=0; j<this.keyMap[i].length;j++){
+            if(!valuesArr.includes(this.keyMap[i][j][1]))
+            valuesArr.push(this.keyMap[i][j][1]);
+          }
+        }
+      }
+      return valuesArr;
+    }
+
+    keys(){
+      let keysArr = [];
+      for(i=0;i<this.keyMap.length;i++){
+        if(this.keyMap[i]){
+          for(let j=0;j<this.keyMap[i].length;j++){
+            if(!keysArr.includes(this.keyMap[i][j][0])){
+              keysArr.push(this.keyMap[i][j][0]);
+            }
+          }
+        }
+      }
+      return keysArr;
+    }
+  }
+  
+  var ht = new HashTable();
+  ht.set("maroon", "#800000");
+  ht.set("yellow","#ffff00");
+  ht.set("plum","#DDA0D0");
+  ht.violet("violet","#DDA0DD");
+
+  ht.keys(forEach( function (key) {
+    console.log(ht.get(key));
+  }))
+  
+  Big O of HASH TABLES
+  --------------------
+  
+  insert - O(1)
+  Delete - O(1)
+  Access - O(1)
+  
+  A good hash function will uniformly allocate space in every index for each elements  // O(1)
+  
+  A worst hashing function will allocate all the values for the same index space.  // O(n)
+  
+  Recap
+  -----
+  1.Hash tables are collections of key-value pairs
+  2.Hash tables can find values quickly given a key
+  3.Hash tables can add new key-values quickly
+  4.Hash tables store data in large array, and work by hashing the keys
+  5.A good hash should be fast,distribute keys uniformly and be deterministic
+  6.Seperate chaining and linear probing are two strategies used to deal with two keys that hash to same index.
+  
+  
+  GRAPHS
+  ------
+  
+  
 
