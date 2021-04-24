@@ -5822,6 +5822,9 @@ class HashTable{
   6.Seperate chaining and linear probing are two strategies used to deal with two keys that hash to same index.
   
   
+  Day - 46
+  --------
+  
   GRAPHS
   ------
   
@@ -6013,8 +6016,427 @@ Graph Traversal Uses
    2.Solving mazes
    3.AI(shortest path to win the game)
 
+DEPTH FIRST
+-----------
+Explore as far as possible down one branch before "backtracking"
+
+DFS Pseudocode
+---------------
+
+Recursive
+---------
+DFS(vertex):
+	if vertex is empty
+		return (this is base case)
+	add vertex to results list
+	mark vertex as visted
+	for each neighbour in vertex's neighbors:
+		if neighbor is not visited:
+			recursively call DFS neighbor
+			
+VISITING THINGS
+----------------
+{
+"A":true,
+"B":true,
+"D":true
+}
+
+Day - 47
+--------
+
+DEPTH FIRST TRAVERSAL
+---------------------
+
+Recursive
+---------
+1. This function should accept a starting node
+2. Create a list to store end result,to be returned at the very end.
+3. Create an object to store visisted vertices.
+4. Create a helper function which accepts a vertex
+	1.Helper function should return early if the vertex is empty
+	2.Helper function should place vertex is empty visisted object and push that vertex into result array.
+	3.Loop over all the values in adjacencyList for the vertex.
+	4.If any of those values have not been visisted,recursively invoke the helper function with that vertex.
+5.Invoke the hepler function with the starting vertex
+6.Return result array.
+
+class Graph{
+    constructor(){
+        this.adjaccencyList = {};
+    }
+
+    addVertex(vertex){
+        if(!this.adjaccencyList[vertex]){
+            this.adjaccencyList[vertex] = [];
+        }
+    }
+
+    addEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1].push(vertex2);
+        this.adjaccencyList[vertex2].push(vertex1);
+    }
+
+    removeEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1] = this.adjaccencyList[vertex1].filter( v => v !== vertex2);
+        this.adjaccencyList[vertex2] = this.adjaccencyList[vertex2].filter( v => v !== vertex1);
+    }
+
+    removeVertex(vertex){
+        while(this.adjaccencyList[vertex].length) {
+            const adjacentVertex = this.adjaccencyList[vertex].pop();
+            this.removeEdge(vertex,adjacentVertex);
+        } 
+        delete this.adjaccencyList[vertex];
+    }
+
+    depthFirstRecursive(start){
+        const result = [];
+        const visited = {};
+        const adjaccencyList = this.adjaccencyList;
+
+        (function dfs(vertex){
+            if(!vertex) return null;
+            visited[vertex] = true;
+            result.push(vertex);
+            adjaccencyList[vertex].forEach(neighbor => {
+                if(!visited[neighbor]){
+                    return dfs(neighbor)
+                }
+            }) 
+        })(start)
+        return result;
+    }
+}
+
+var graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+
+graph.addEdge("A","B");
+graph.addEdge("A","C");
+graph.addEdge("B","D");
+graph.addEdge("C","E");
+graph.addEdge("D","E");
+graph.addEdge("D","F");
+graph.addEdge("E","F");
+
+graph.depthFirstRecursive("A");
+
+DFS PSEUDOCODE ITERATIVE
+-------------------------
+
+DFS_iterative(start):
+	let S be a stack
+	S.push(start)
+	while S is not empty:
+	     vertex = S.pop()
+	     if vertex is not labelled as discovered:
+	     		visit vertex (add to result list)
+			label vertex as discovered
+			for each of vertex's neighbors, N do
+				S.push(N);
+				
+Depth First Traversal
+---------------------
+Iterative
+---------
+
+1.Function should accept a starting node
+2.Create a stack to help use keep track of vertices(use a list/array)
+3.Create a list store end result, to be returned at the very end
+4.Create an object store visited vertices
+5.Add starting vertex to the stack, and mark it visited.
+6.While stack has something in it:
+	1.Pop the next vertex from the stack
+	2.If that vertex hasn't been visited yet:
+		1.Mark it as visited
+		2.add it result list
+		3.Push all of its neighbors intot he stack
+7.Return the result array
+
+class Graph{
+    constructor(){
+        this.adjaccencyList = {};
+    }
+
+    addVertex(vertex){
+        if(!this.adjaccencyList[vertex]){
+            this.adjaccencyList[vertex] = [];
+        }
+    }
+
+    addEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1].push(vertex2);
+        this.adjaccencyList[vertex2].push(vertex1);
+    }
+
+    removeEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1] = this.adjaccencyList[vertex1].filter( v => v !== vertex2);
+        this.adjaccencyList[vertex2] = this.adjaccencyList[vertex2].filter( v => v !== vertex1);
+    }
+
+    removeVertex(vertex){
+        while(this.adjaccencyList[vertex].length) {
+            const adjacentVertex = this.adjaccencyList[vertex].pop();
+            this.removeEdge(vertex,adjacentVertex);
+        } 
+        delete this.adjaccencyList[vertex];
+    }
+
+//     depthFirstRecursive(start){
+//         const result = [];
+//         const visited = {};
+//         const adjaccencyList = this.adjaccencyList;
+
+//         (function dfs(vertex){
+//             if(!vertex) return null;
+//             visited[vertex] = true;
+//             result.push(vertex);
+//             adjaccencyList[vertex].forEach(neighbor => {
+//                 if(!visited[neighbor]){
+//                     return dfs(neighbor)
+//                 }
+//             }) 
+//         })(start)
+//         return result;
+//     }
+
+    depthFirstIterative(start){
+        const visited = {};
+        const stack = [start];
+        const result = [];
+        let currentVertex;
+
+        visited[start] = true;
+        while(stack.length){
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjaccencyList[currentVertex].forEach(neighbor => {
+                if(!visited[neighbor]){
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            })
+
+        }
+        return result;
+    }
+}
+
+var graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+
+graph.addEdge("A","B");
+graph.addEdge("A","C");
+graph.addEdge("B","D");
+graph.addEdge("C","E");
+graph.addEdge("D","E");
+graph.addEdge("D","F");
+graph.addEdge("E","F");
+
+graph.depthFirstIterative("A");
+
+Breadth First
+------------
+Visit neighbors at current depath first!!!
+
+Pseudocode
+----------
+1.Thius function should accept a starting vertex
+2.create a queue and place starting vertex in it
+3.Create an array to sore nodes visisted
+4.Create object to store nodes visited.
+5.Loop as long as ther eis anything in queue
+6.Remove first vertex from queue and push it ionto array that stores nodes visisted.
+7.Loop over each vertex in adjacenecy list for vertex you are visisting
+8.If it is not objct thats tores nodes visited, amrk it as visisted band enqueue that vertex
+9.Once you have finished looping,returnh array of visisted nodes
 
 
+class Graph{
+    constructor(){
+        this.adjaccencyList = {};
+    }
 
+    addVertex(vertex){
+        if(!this.adjaccencyList[vertex]){
+            this.adjaccencyList[vertex] = [];
+        }
+    }
 
+    addEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1].push(vertex2);
+        this.adjaccencyList[vertex2].push(vertex1);
+    }
+
+    removeEdge(vertex1,vertex2){
+        this.adjaccencyList[vertex1] = this.adjaccencyList[vertex1].filter( v => v !== vertex2);
+        this.adjaccencyList[vertex2] = this.adjaccencyList[vertex2].filter( v => v !== vertex1);
+    }
+
+    removeVertex(vertex){
+        while(this.adjaccencyList[vertex].length) {
+            const adjacentVertex = this.adjaccencyList[vertex].pop();
+            this.removeEdge(vertex,adjacentVertex);
+        } 
+        delete this.adjaccencyList[vertex];
+    }
+
+//     depthFirstRecursive(start){
+//         const result = [];
+//         const visited = {};
+//         const adjaccencyList = this.adjaccencyList;
+
+//         (function dfs(vertex){
+//             if(!vertex) return null;
+//             visited[vertex] = true;
+//             result.push(vertex);
+//             adjaccencyList[vertex].forEach(neighbor => {
+//                 if(!visited[neighbor]){
+//                     return dfs(neighbor)
+//                 }
+//             }) 
+//         })(start)
+//         return result;
+//     }
+
+// 
+
+    breadthFirstIterative(start){
+        const visited = {};
+        const queue = [start];
+        const result = [];
+        let currentVertex;
+
+        visited[start] = true;
+        while(queue.length){
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            this.adjaccencyList[currentVertex].slice().reverse().forEach(neighbor => {
+                if(!visited[neighbor]){
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            })
+        }
+    return result;
+    }
+}
+
+var graph = new Graph();
+graph.addVertex("A");
+graph.addVertex("B");
+graph.addVertex("C");
+graph.addVertex("D");
+graph.addVertex("E");
+graph.addVertex("F");
+
+graph.addEdge("A","B");
+graph.addEdge("A","C");
+graph.addEdge("B","D");
+graph.addEdge("C","E");
+graph.addEdge("D","E");
+graph.addEdge("D","F");
+graph.addEdge("E","F");
+
+//graph.depthFirstIterative("A");
+
+Dijkstra's Algorithm
+---------------------
+Objectives
+----------
+1.Understand importance of Dijkstra's
+2.Impelment a weighted Graph
+3.Walk through steps of Dijkstra's
+4.Implement Dijkstra's using naive priority queue
+5.Implement Dijkstra's using a binary heap priority queue
+
+WHAT IS IT???
+-------------
+One of most famous and widely used algorithms around!!!
+
+Finds The shortest path between two vertices on graph
+
+"What's the fastest way to get from point A to point B??"
+
+WHo was He???
+
+Programmer,physist,essayist and all around smarty-pants
+
+He helped to advance field computer science from "art" to academic displine
+
+Many of his discoveries and algorithms are still commonly used to this day.
+
+He Did a lot of algorithms
+
+Why is it useful???
+1.GPS - finding fastest route
+2.Network Routing - Finds open shortest path for data
+3.Biology - Used to model spread of viruses among humans
+4.Airlinetickets - Finding cheapest route to your destination
+5.many other uses!!!
+
+let's write a weighted graph
+
+The Appraoch
+-------------
+1.Every time we look to visit new node, we pick node with smallest known distance to visit first.
+2.Once we've moved to node we're going to visit,we look at each of its neighbors
+3.For each neoghboring node,we calculate distance by summing total edges that lead to node we're checking from starting node
+4.If new total distance to node is less than previous total, we store new shorter distance for that node.
+
+class PriorityQueue{
+    constructor(){
+        this.values = [];
+    }
+
+    enqueue(value,priority){
+        this.values.push({value,priority});
+        this.sort();
+    }
+
+    dequeue(){
+        return this.values.shift();
+    }
+
+    sort(){
+        this.values.sort((a,b) => a.priority - b.priority);
+    }
+}
+
+//Notice we are sorting which is O(n * logn)
+// Huge time complexity if we use Priority Queue for Dijkstra's algorithm
+
+var prio = new PriorityQueue();
+prio.enqueue("High Fever",3);
+prio.enqueue("Pregnant",1);
+prio.enqueue("Accident",1);
+prio.enqueue("Typhoid",2);
+prio.dequeue();
+
+Dijkstra's Pseudocode
+---------------------
+1.This function should accept a starting and ending vertex
+2.Create an object (distances) and set each key to be every vertex in adjacency list with value of infinity,except for starting vertex which should have a value of 0.
+3.After setting a value in the distances object,add each vertex with a priority of infinity to the priority queue,except startig vertex, which should have priority of 0 because that's where we begin.
+4.create another object called previous and set each key to be every vertex in adjacency list with a value of null
+5.start looping as long as there is anything in priority queue
+	1.dequeue a vertex from priority queue
+	2.if that vertex is same as ending vertex - we are done!!
+	3.Otherwise loop through each value in adjacency list at that vertex
+		1.calculate the distance to that vertex from starting vertex
+		2.If distance is less than what is currently stored in our distances object
+			1.update distances object with new lower distance
+			2.update previuos object to contain that vertex
+			3.enqueue vertex with total distance from start node
 
