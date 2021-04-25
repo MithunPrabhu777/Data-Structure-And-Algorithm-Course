@@ -6440,3 +6440,289 @@ Dijkstra's Pseudocode
 			2.update previuos object to contain that vertex
 			3.enqueue vertex with total distance from start node
 
+
+Day - 48
+---------
+
+class PriorityQueue{
+    constructor(){
+        this.values = [];
+    }
+
+    enqueue(val,priority){
+        this.values.push({val,priority});
+        this.sort();
+    }
+
+    dequeue(){
+        return this.values.shift();
+    }
+
+    sort(){
+        this.values.sort((a,b) => a.priority - b.priority);
+    }
+}
+
+//Notice we are sorting which is O(n * logn)
+// Huge time complexity if we use Priority Queue for Dijkstra's algorithm
+
+class WeightedGraph{
+    constructor(){
+        this.adjacencyList = {};
+    }
+
+    addvertex(vertex){
+        if(!this.adjacencyList[vertex]) return this.adjacencyList[vertex] = [];
+    }
+
+    addEdge(vertex1,vertex2,weight){
+        this.adjacencyList[vertex1].push({node:vertex2,weight});
+        this.adjacencyList[vertex2].push({node:vertex1,weight});
+    }
+
+    Dijkstra(start,finish){
+        const nodes = new PriorityQueue();
+        const distances = {};
+        const previous = {};
+        let smallest;
+        let path = [];
+        //Build up initial state
+        for(let vertex in this.adjacencyList){
+            if(vertex === start){
+                distances[vertex] = 0;
+                nodes.enqueue(vertex,0);
+            } else{
+                distances[vertex] = Infinity;
+                nodes.enqueue(vertex,Infinity);
+            }
+            previous[vertex] = null;
+        }
+
+        //As long as there is something to visit
+        while(nodes.values.length){                    //  7
+            smallest = nodes.dequeue().val;            //  'A'
+            if(smallest === finish){ 
+                 //WE ARE DONE   
+                 //Build Up Path To Return At End
+                 while(previous[smallest]){
+                     path.push(smallest);
+                     smallest = previous[smallest];
+                 }
+                break;
+            }                      
+                                                         // check here too
+            if(smallest || distances[smallest] !== Infinity){               // "A" or distances["A"] == 0 true
+                for(let neighbor in this.adjacencyList[smallest]){      //  "0" "1" in "A"
+                    //find neighboring node
+                    let nextNode = this.adjacencyList[smallest][neighbor];  //  "A""0" --> "B" , "A""1" --> C
+                    // console.log(nextNode);             
+                    //calculate new distance to neighboring node 
+                    let candidate = distances[smallest] + nextNode.weight;  // candidate  0 + 4 = 4
+                    let nextNeighbor = nextNode.node;          
+                    if(candidate < distances[nextNeighbor]){    // 4 < infinity
+//                         console.log(candidate);                 // 4
+//                         console.log(distances[nextNode.node]);   // Infinity
+                           // updating new smallest distance to neighbor
+                           distances[nextNode.node] = candidate;    //    4 is assigned to infinity 
+                           // Updating previous  - Now we got to neighbor
+                           previous[nextNeighbor] = smallest;    //   "A" is assigned to previous[nextNeighbor]
+                           //enqueue in priority queue with new priority
+                           nodes.enqueue(nextNeighbor,candidate);
+                    }                   
+                }
+            }
+        }
+//         console.log(path);
+        return path.concat(smallest).reverse();
+    }
+}
+
+var graph = new WeightedGraph();
+graph.addvertex("A");
+graph.addvertex("B");
+graph.addvertex("C");
+graph.addvertex("D");
+graph.addvertex("E");
+graph.addvertex("F");
+
+graph.addEdge("A","B",4);
+graph.addEdge("A","C",2);
+graph.addEdge("C","D",2);
+graph.addEdge("C","F",4);
+graph.addEdge("B","E",3);
+graph.addEdge("D","E",3);
+graph.addEdge("D","F",1);
+graph.addEdge("F","E",1);
+
+graph.Dijkstra("A","F");
+
+
+This is not efficient way of sorting values ,,, best way to this dijkstra's is using binary heap for priority Queue
+
+
+Dynamic Programming
+-------------------
+Objectives
+----------
+1.Define what dynamic programming is
+2.Explain what overlapping subproblems are
+3.Understand what optimal substructure is
+4.Solve more challenging problems using dynamic programming
+
+WTF is Dynamic Programming???
+A method for solving a complex problem by breaking it down into a collection of simpler subproblems,solvig each of those subproblems just once and storing their solutions.
+
+Where does name come from???
+1940
+
+It only works on problems with .... 1.optimal substructure  2.Overlapping subproblems
+
+Overlapping subproblems
+-----------------------
+A problem is said to have overlapping subproblems if it can be broken down into subproblems which are reused several times.
+
+Fibonacci Sequence
+------------------
+"Every number after first two is sum of two preceding ones"
+
+1 1 2 3 5 8 13
+
+fibonnaci Numbers
+------------------
+			   fib(5)
+			
+		fib(4)       +      fib(3)
+		
+	fib(3)   +    fib(2)   fib(2)  +  fib(1)
+	
+fib(2)  +   fib(1)
+
+
+Remember MergeSort???
+---------------------
+
+					mergeSort([10,24,76,73])
+				              [10,24,73,76]
+			mergeSort([10,24])                    mergeSort([76,73])
+			      merge                               merge
+			      [10,24]                            [73,76]
+	     mergeSort([10])        mergeSort([24])   mergeSort([76])    mergeSort([73])
+                                                             
+
+But this is No overlapping subproblems
+
+A very special case
+					mergeSort([10,24,10,24])
+				              [10,24,10,24]
+			mergeSort([10,24])                    mergeSort([10,24])     // this is what is called overlapping subproblem
+			      merge                               merge
+			      [10,24]                            [10,24]
+	     mergeSort([10])        mergeSort([24])   mergeSort([10])    mergeSort([24])
+	     
+Optimal Substructure
+---------------------
+A problem is said to have optimal substructure if an optimal solution can be constructed from optimal solutions of its subproblems.
+
+Shortest path
+-------------
+
+Optimal Substructure
+---------------------
+
+A ---> B  ----> C ----> D   A to D
+A ---> B  ----> C           A to C
+A ---> B                    A to B
+
+
+Longest Simple Path
+--------------------
+No Optimal Substructure 
+
+Fibonacci Sequence is best example but it's performnce is very worst that is 2^n - exponential growth
+
+Fibonnacci tree will grow exponential every time which dangerous foe even small inputs.
+
+function fibonacci(n){
+if(n<=2) return 1;
+return fibonacci(n-1) + fibonacci(n-2);
+}          
+
+/// fibonacci(1)
+1
+fibonacci(2)
+1
+fibonacci(3)
+2
+fibonacci(4)
+3
+fibonacci(5)
+5
+fibonacci(6)
+8
+fibonacci(7)
+13
+fibonacci(8)
+21
+       
+WE are repeating,,,this is not good.
+
+What if we could remember old values???
+
+Enter Dynamic Programming
+-------------------------
+
+Memorization
+------------
+Storing results of expensive function calls and returning cached result when same inputs occur again.
+
+A MeMo - Ized Solution
+-----------------------
+
+function fib(n, memo=[]){
+if(memo[n] !== undefined) return memo[n]
+if(n<= 2) return 1;
+var res = fib(n-1,memo) + fib(n-2,memo);
+memo[n] = res;
+return res;
+}
+
+Recursion + Memoization     
+
+   1  1  2  3  5  8
+0  1  2  3  4  5  6
+
+Let's chat about Big O
+-----------------------
+Much Better O(n)
+
+We've been working Top-Down but there is another way!!!
+Bottom Up
+---------
+
+Tabulation
+-----------
+
+Storing The result of previous result in a "table" (usually array)
+
+Usually done using iteration
+
+Better Space Complexity can be achieved using tabulation.
+
+Recursion is not for space complexity...!!!!
+
+function fib(n){
+    if(n <= 2) return 1;    
+    var fibonacciarray = [0,1,1];
+    for(var i=3; i <= n;i++){   
+       fibonacciarray[i]  = fibonacciarray[i-1] + fibonacciarray[i-2];
+    }
+    return fibonacciarray[n];
+}
+
+fib(100);
+
+Tabulation is best way then memoization because if you give 10000 as input for memo it will print stack limit exceed it just freak out error message
+
+but Tabulation is cool guy who prints Infinity as output.
+
+
